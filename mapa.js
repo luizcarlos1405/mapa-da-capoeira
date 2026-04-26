@@ -173,9 +173,22 @@ async function principal() {
             var ponto = pontos[i];
             var coords = null;
 
-            if (!isNaN(ponto['_lat']) && !isNaN(ponto['_lon'])) {
+            if (ponto['Coordenadas'] && ponto['Coordenadas'].trim()) {
+                var partes = ponto['Coordenadas'].split(',');
+                if (partes.length >= 2) {
+                    var latCoord = parseFloat(partes[0].trim());
+                    var lonCoord = parseFloat(partes[1].trim());
+                    if (!isNaN(latCoord) && !isNaN(lonCoord)) {
+                        coords = { lat: latCoord, lon: lonCoord };
+                    }
+                }
+            }
+
+            if (!coords && !isNaN(ponto['_lat']) && !isNaN(ponto['_lon'])) {
                 coords = { lat: ponto['_lat'], lon: ponto['_lon'] };
-            } else {
+            }
+
+            if (!coords) {
                 coords = await geocodificar(ponto['Endereço']);
             }
 

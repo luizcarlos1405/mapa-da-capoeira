@@ -105,10 +105,9 @@ function criarMapa() {
 function criarIcone() {
   return L.divIcon({
     className: "",
-    html:
-      '<svg xmlns="http://www.w3.org/2000/svg" width="30" height="42" viewBox="0 0 30 42">' +
-      '<path d="M15 0C6.7 0 0 6.7 0 15c0 10.5 15 27 15 27s15-16.5 15-27C30 6.7 23.3 0 15 0z" fill="#2E7D32"/>' +
-      '<circle cx="15" cy="14" r="6" fill="#fff"/></svg>',
+    html: `<svg xmlns="http://www.w3.org/2000/svg" width="30" height="42" viewBox="0 0 30 42">
+      <path d="M15 0C6.7 0 0 6.7 0 15c0 10.5 15 27 15 27s15-16.5 15-27C30 6.7 23.3 0 15 0z" fill="#2E7D32"/>
+      <circle cx="15" cy="14" r="6" fill="#fff"/></svg>`,
     iconSize: [30, 42],
     iconAnchor: [15, 42],
     popupAnchor: [0, -42],
@@ -122,49 +121,30 @@ function conteudoPopup(ponto) {
     .filter((h) => h)
     .join("<br>");
 
-  var plusCode = ponto["Plus Code"]
-    ? "<p><strong>Plus Code:</strong> " + ponto["Plus Code"] + "</p>"
+  const plusCode = ponto["Plus Code"]
+    ? `<p><strong>Plus Code:</strong> ${ponto["Plus Code"]}</p>`
     : "";
 
-  return (
-    '<div class="popup-conteudo">' +
-    "<h3>" +
-    ponto["Grupo"] +
-    "</span></h3>" +
-    "<p><strong>Responsável:</strong> " +
-    ponto["Nome do Responsável"] +
-    "</p>" +
-    "<p><strong>Telefone:</strong> " +
-    ponto["Telefone de Contato"] +
-    "</p>" +
-    "<p><strong>Endereço:</strong> " +
-    ponto["Endereço"] +
-    "</p>" +
-    plusCode +
-    '<div class="horarios"><strong>Horários:</strong><br>' +
-    horarios +
-    "</div>" +
-    "</div>"
-  );
+  return `<div class="popup-conteudo">
+    <h3>${ponto["Grupo"]}</h3>
+    <p><strong>Responsável:</strong> ${ponto["Nome do Responsável"]}</p>
+    <p><strong>Telefone:</strong> ${ponto["Telefone de Contato"]}</p>
+    <p><strong>Endereço:</strong> ${ponto["Endereço"]}</p>
+    ${plusCode}
+    <div class="horarios"><strong>Horários:</strong><br>${horarios}</div>
+  </div>`;
 }
 
 function criarItemLista(ponto, mapa, marcador) {
   const item = document.createElement("div");
   item.className = "item-lista";
 
-  item.innerHTML =
-    '<div class="nome-grupo">' +
-    ponto["Grupo"] +
-    "</div>" +
-    '<div class="detalhes">' +
-    ponto["Nome do Responsável"] +
-    "</div>" +
-    '<div class="endereco">' +
-    ponto["Endereço"] +
-    "</div>";
+  item.innerHTML = `<div class="nome-grupo">${ponto["Grupo"]}</div>
+    <div class="detalhes">${ponto["Nome do Responsável"]}</div>
+    <div class="endereco">${ponto["Endereço"]}</div>`;
 
-  item.onclick = function () {
-    var latlng = marcador.getLatLng();
+  item.onclick = () => {
+    const latlng = marcador.getLatLng();
     mapa.setView(latlng, 16);
     marcador.openPopup();
     if (window.innerWidth <= 768) {
@@ -176,83 +156,91 @@ function criarItemLista(ponto, mapa, marcador) {
 }
 
 function sleep(ms) {
-  return new Promise(function (resolve) {
-    setTimeout(resolve, ms);
-  });
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 function alternarPainel() {
   document.getElementById("painel").classList.toggle("aberto");
 }
 
-async function principal() {
-  var mapa = criarMapa();
-  var icone = criarIcone();
-  var lista = document.getElementById("lista-locais");
+function extrairCoordenadas(ponto) {
+  if (ponto["Coordenadas"]?.trim()) {
+    const partes = ponto["Coordenadas"].split(",");
+    if (partes.length >= 2) {
+      const lat = parseFloat(partes[0].trim());
+      const lon = parseFloat(partes[1].trim());
+      if (!isNaN(lat) && !isNaN(lon)) {
+        return { lat, lon };
+      }
+    }
+  }
+
+  if (!isNaN(ponto["_lat"]) && !isNaN(ponto["_lon"])) {
+    return { lat: ponto["_lat"], lon: ponto["_lon"] };
+  }
+
+  return null;
+}
+
+function criarMarcador(ponto, coords, mapa, icone) {
+  return L.marker([coords.lat, coords.lon], { icon: icone })
+    .addTo(mapa)
+    .bindPopup(conteudoPopup(ponto), { maxWidth: 300 });
+}
+
+function criarAvisoNaoEncontrado(ponto) {
+  const aviso = document.createElement("div");
+  aviso.className = "item-lista";
+  aviso.innerHTML = `<div class="nome-grupo" style="color:#c62828">${ponto["Grupo"]}</div>
+    <div class="detalhes" style="color:#c62828">Endereço não localizado</div>
+    <div class="endereco">${ponto["Endereço"]}</div>`;
+  return aviso;
+}
+
+async function inicializarMapa() {
+  const mapa = criarMapa();
+  const icone = criarIcone();
+  const lista = document.getElementById("lista-locais");
 
   try {
-    var resposta = await fetch(ARQUIVO_DADOS);
-    if (!resposta.ok)
+    const resposta = await fetch(ARQUIVO_DADOS);
+    if (!resposta.ok) {
       throw new Error("Arquivo não encontrado: " + ARQUIVO_DADOS);
+    }
 
-    var texto = await resposta.text();
-    var pontos = parsearCSV(texto).filter(function (p) {
-      return (
-        p["Mostrar no Mapa"] && p["Mostrar no Mapa"].toUpperCase() === "TRUE"
-      );
-    });
-    var comCoords = [];
-    var semCoords = [];
+    const texto = await resposta.text();
+    const pontos = parsearCSV(texto).filter(
+      (p) => p["Mostrar no Mapa"]?.toUpperCase() === "TRUE",
+    );
 
-    for (var i = 0; i < pontos.length; i++) {
-      var ponto = pontos[i];
-      var coords = null;
+    const comCoords = [];
+    const semCoords = [];
 
-      if (ponto["Coordenadas"] && ponto["Coordenadas"].trim()) {
-        var partes = ponto["Coordenadas"].split(",");
-        if (partes.length >= 2) {
-          var latCoord = parseFloat(partes[0].trim());
-          var lonCoord = parseFloat(partes[1].trim());
-          if (!isNaN(latCoord) && !isNaN(lonCoord)) {
-            coords = { lat: latCoord, lon: lonCoord };
-          }
-        }
-      }
-
-      if (!coords && !isNaN(ponto["_lat"]) && !isNaN(ponto["_lon"])) {
-        coords = { lat: ponto["_lat"], lon: ponto["_lon"] };
-      }
-
+    for (const ponto of pontos) {
+      const coords = extrairCoordenadas(ponto);
       if (coords) {
-        comCoords.push({ ponto: ponto, coords: coords });
+        comCoords.push({ ponto, coords });
       } else {
         semCoords.push(ponto);
       }
     }
 
-    var marcadores = [];
+    const marcadores = [];
 
-    for (var i = 0; i < comCoords.length; i++) {
-      var item = comCoords[i];
-      var marcador = L.marker([item.coords.lat, item.coords.lon], {
-        icon: icone,
-      })
-        .addTo(mapa)
-        .bindPopup(conteudoPopup(item.ponto), { maxWidth: 300 });
-
+    for (const { ponto, coords } of comCoords) {
+      const marcador = criarMarcador(ponto, coords, mapa, icone);
       marcadores.push(marcador);
-      lista.appendChild(criarItemLista(item.ponto, mapa, marcador));
+      lista.appendChild(criarItemLista(ponto, mapa, marcador));
     }
 
     if (marcadores.length > 0) {
       mapa.fitBounds(L.featureGroup(marcadores).getBounds().pad(0.2));
     }
 
-    for (var i = 0; i < semCoords.length; i++) {
-      var ponto = semCoords[i];
-      var coords = null;
+    for (const [i, ponto] of semCoords.entries()) {
+      let coords = null;
 
-      if (ponto["Plus Code"] && ponto["Plus Code"].trim()) {
+      if (ponto["Plus Code"]?.trim()) {
         coords = await geocodificar(ponto["Plus Code"].trim());
       }
 
@@ -261,10 +249,7 @@ async function principal() {
       }
 
       if (coords) {
-        var marcador = L.marker([coords.lat, coords.lon], { icon: icone })
-          .addTo(mapa)
-          .bindPopup(conteudoPopup(ponto), { maxWidth: 300 });
-
+        const marcador = criarMarcador(ponto, coords, mapa, icone);
         marcadores.push(marcador);
         lista.appendChild(criarItemLista(ponto, mapa, marcador));
 
@@ -272,19 +257,8 @@ async function principal() {
           mapa.fitBounds(L.featureGroup(marcadores).getBounds().pad(0.2));
         }
       } else {
-        console.warn('Endereço não encontrado: "' + ponto["Endereço"] + '"');
-
-        var aviso = document.createElement("div");
-        aviso.className = "item-lista";
-        aviso.innerHTML =
-          '<div class="nome-grupo" style="color:#c62828">' +
-          ponto["Grupo"] +
-          "</div>" +
-          '<div class="detalhes" style="color:#c62828">Endereço não localizado</div>' +
-          '<div class="endereco">' +
-          ponto["Endereço"] +
-          "</div>";
-        lista.appendChild(aviso);
+        console.warn(`Endereço não encontrado: "${ponto["Endereço"]}"`);
+        lista.appendChild(criarAvisoNaoEncontrado(ponto));
       }
 
       if (i < semCoords.length - 1) {
@@ -292,19 +266,15 @@ async function principal() {
       }
     }
 
-    var rodape = document.createElement("div");
+    const rodape = document.createElement("div");
     rodape.className = "rodape-painel";
-    rodape.textContent =
-      comCoords.length + semCoords.length + " local(is) encontrado(s)";
+    rodape.textContent = `${comCoords.length + semCoords.length} local(is) encontrado(s)`;
     lista.appendChild(rodape);
   } catch (erro) {
     console.error("Erro:", erro);
-    lista.innerHTML =
-      '<div class="item-lista"><div class="detalhes" style="color:#c62828">' +
-      "Erro ao carregar dados. Verifique se o servidor está rodando e o arquivo " +
-      ARQUIVO_DADOS +
-      " existe.</div></div>";
+    lista.innerHTML = `<div class="item-lista"><div class="detalhes" style="color:#c62828">
+      Erro ao carregar dados. Verifique se o servidor está rodando e o arquivo ${ARQUIVO_DADOS} existe.</div></div>`;
   }
 }
 
-principal();
+inicializarMapa();

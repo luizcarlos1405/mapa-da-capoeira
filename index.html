@@ -1,32 +1,37 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mapa da Capoeira</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
     <link rel="stylesheet" href="estilo.css" />
-</head>
-<body>
+  </head>
+  <body>
     <div id="mapa"></div>
 
     <div id="carregando">
-        <div class="spinner"></div>
-        <p>Carregando pontos no mapa...</p>
+      <div class="spinner"></div>
+      <p>Carregando pontos no mapa...</p>
     </div>
 
     <div id="cabecalho">
-        <h1>Mapa da Capoeira</h1>
+      <h1>Mapa da Capoeira</h1>
     </div>
 
-    <button id="btn-painel" onclick="alternarPainel()" title="Lista de locais">☰</button>
+    <button id="btn-painel" onclick="alternarPainel()" title="Lista de locais">
+      ☰
+    </button>
 
     <div id="painel">
-        <h2>Locais de Treino</h2>
-        <div id="lista-locais"></div>
+      <h2>Locais de Treino</h2>
+      <div id="lista-locais"></div>
     </div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="mapa.js"></script>
-</body>
+  </body>
 </html>

@@ -44,6 +44,8 @@ Current columns: `Mostrar no Mapa`, `Nome do Endereço`, `Endereço`, `Plus Code
 
 - `mapa.js` is the single entrypoint (self-invoking `principal()` at the bottom)
 - Geocoding uses **Nominatim** (OpenStreetMap) with a 1.1-second delay between requests (`ATRASO_GEOCODE_MS`)
+- Coordinate resolution order: `Coordenadas` column → `Latitude`/`Longitude` columns → Plus Code geocoding → `Endereço` geocoding
 - Geocode results are cached in `localStorage` under key `mapacapoeira_geocode`
-- Cache is keyed by the raw `Endereço` field value — if an address is corrected in the CSV, the old cache entry will still match and serve stale coordinates. Clear with `localStorage.removeItem('mapacapoeira_geocode')`
+- Cache is keyed by the raw address string passed to `geocodificar()` — if an address or Plus Code is corrected in the CSV, the old cache entry will still match and serve stale coordinates. Clear with `localStorage.removeItem('mapacapoeira_geocode')`
 - The CSV parser (`parsearCSV` / `separarCampos`) handles quoted fields and escaped double-quotes, but does not handle newlines inside quoted fields
+- Rows are filtered by `Mostrar no Mapa` = `TRUE` before processing (others are silently skipped)

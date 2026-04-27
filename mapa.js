@@ -228,9 +228,7 @@ async function principal() {
       }
 
       if (!coords && ponto["Plus Code"] && ponto["Plus Code"].trim()) {
-        console.log("trying plus code");
         coords = await geocodificar(ponto["Plus Code"].trim());
-        console.log(`coords`, coords);
       }
 
       if (!coords) {

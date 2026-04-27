@@ -188,7 +188,6 @@ function alternarPainel() {
 async function principal() {
   var mapa = criarMapa();
   var icone = criarIcone();
-  var carregando = document.getElementById("carregando");
   var lista = document.getElementById("lista-locais");
 
   try {
@@ -202,7 +201,8 @@ async function principal() {
         p["Mostrar no Mapa"] && p["Mostrar no Mapa"].toUpperCase() === "TRUE"
       );
     });
-    var marcadores = [];
+    var comCoords = [];
+    var semCoords = [];
 
     for (var i = 0; i < pontos.length; i++) {
       var ponto = pontos[i];
@@ -223,7 +223,36 @@ async function principal() {
         coords = { lat: ponto["_lat"], lon: ponto["_lon"] };
       }
 
-      if (!coords && ponto["Plus Code"] && ponto["Plus Code"].trim()) {
+      if (coords) {
+        comCoords.push({ ponto: ponto, coords: coords });
+      } else {
+        semCoords.push(ponto);
+      }
+    }
+
+    var marcadores = [];
+
+    for (var i = 0; i < comCoords.length; i++) {
+      var item = comCoords[i];
+      var marcador = L.marker([item.coords.lat, item.coords.lon], {
+        icon: icone,
+      })
+        .addTo(mapa)
+        .bindPopup(conteudoPopup(item.ponto), { maxWidth: 300 });
+
+      marcadores.push(marcador);
+      lista.appendChild(criarItemLista(item.ponto, mapa, marcador));
+    }
+
+    if (marcadores.length > 0) {
+      mapa.fitBounds(L.featureGroup(marcadores).getBounds().pad(0.2));
+    }
+
+    for (var i = 0; i < semCoords.length; i++) {
+      var ponto = semCoords[i];
+      var coords = null;
+
+      if (ponto["Plus Code"] && ponto["Plus Code"].trim()) {
         coords = await geocodificar(ponto["Plus Code"].trim());
       }
 
@@ -238,6 +267,10 @@ async function principal() {
 
         marcadores.push(marcador);
         lista.appendChild(criarItemLista(ponto, mapa, marcador));
+
+        if (marcadores.length === 1) {
+          mapa.fitBounds(L.featureGroup(marcadores).getBounds().pad(0.2));
+        }
       } else {
         console.warn('Endereço não encontrado: "' + ponto["Endereço"] + '"');
 
@@ -254,18 +287,15 @@ async function principal() {
         lista.appendChild(aviso);
       }
 
-      if (i < pontos.length - 1) {
+      if (i < semCoords.length - 1) {
         await sleep(ATRASO_GEOCODE_MS);
       }
     }
 
-    if (marcadores.length > 0) {
-      mapa.fitBounds(L.featureGroup(marcadores).getBounds().pad(0.2));
-    }
-
     var rodape = document.createElement("div");
     rodape.className = "rodape-painel";
-    rodape.textContent = pontos.length + " local(is) encontrado(s)";
+    rodape.textContent =
+      comCoords.length + semCoords.length + " local(is) encontrado(s)";
     lista.appendChild(rodape);
   } catch (erro) {
     console.error("Erro:", erro);
@@ -274,8 +304,6 @@ async function principal() {
       "Erro ao carregar dados. Verifique se o servidor está rodando e o arquivo " +
       ARQUIVO_DADOS +
       " existe.</div></div>";
-  } finally {
-    carregando.classList.add("escondido");
   }
 }
 

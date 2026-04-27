@@ -130,8 +130,6 @@ function conteudoPopup(ponto) {
     '<div class="popup-conteudo">' +
     "<h3>" +
     ponto["Grupo"] +
-    ' <span class="tag-estilo">' +
-    ponto["Estilo"] +
     "</span></h3>" +
     "<p><strong>Responsável:</strong> " +
     ponto["Nome do Responsável"] +
@@ -159,8 +157,6 @@ function criarItemLista(ponto, mapa, marcador) {
     ponto["Grupo"] +
     "</div>" +
     '<div class="detalhes">' +
-    ponto["Estilo"] +
-    " — " +
     ponto["Nome do Responsável"] +
     "</div>" +
     '<div class="endereco">' +

@@ -1,3 +1,18 @@
-Endereço,Nome do Responsável,Telefone de Contato,Grupo,Estilo,Horários de Treino,Coordenadas
-"Rua Independência 285, Dourados, MS","Mestre Guerreiro","67 9849-4129","Associação de Capoeira Baiana","Contemporânea","Seg 19:30-21:00;Quar 19:30-21:00;Sext 19:30-21:00",
-"AJI - Aldeia Bororó, MS","Bruno Grãos","67 98187-9226","Centro Cultural Grãos","Angola","Sábados 9h","-22.1638911,-54.864631"
+Mostrar no Mapa,Nome do Endereço,Endereço,Plus Code,Coordenadas,Nome do Responsável,Telefone de Contato,Grupo,Horários de Treino,Última revisão em
+TRUE,Capoeira Abada Capoeira,"R. Cezário Domingues Perez, 6575 - Vila Ubiratan, Dourados - MS, 79841-070","Q6FP+F5 Dourados, MS","-22.2263386,-54.7671786",Professor Ricardo,67 99905-6378,Abada,,27/04/2026
+TRUE,Escola Municipal Weimar Gonçalves Torres,"R. Antônio Emílio de Figueiredo, 80 - Jardim Olinda, Dourados - MS, 79820-140","Q589+G9 Dourados, MS","-22.2337708,-54.8341526",Professor Ned,67 99317-2055,Camará,Terça e Quinta feira das 18:30 as 20:30 horas.,28/04/2026
+TRUE,Associação e Centro Social dos Militares Estaduais e Pensionista do Estado MS- Regional de Dourados,"R. Antônio Luís Marra, 2375 - Izidro Pedroso, Dourados - MS, 79840-496","Q664+7H Izidro Pedroso, Dourados - MS","-22.239222,-54.7962717",Professor Líria,14 99660-3397,Capoeira Filhos de Jamaica,,29/04/2026
+TRUE,Campo Zé Tabela,"Rua Hiran Pereira de Matos, 582-698 - Dourados, MS","Q6R7+7P Jardim dos Estados, Dourados - MS","-22.2097843,-54.7887567",Professor Fininho,67 99903-7033,Tribos Capoeira,,30/04/2026
+TRUE,Campo do Loureiro,"R. Antônio Amaro de Mattos, 6008-6568 - Parque Res. Pelicano, Dourados - MS, 79830-060","Q6RF+V9 Parque Res. Pelicano, Dourados - MS","-22.2078616,-54.7791366",Professor Ceará,67 99954-7818,Camará,,01/05/2026
+TRUE,Associaçao De Capoeira Baiana Mestre Guerreiro,"R. Independência, 285 - Jardim Italia, Dourados - MS, 79814-470","Q57M+PR Jardim Italia, Dourados - MS","-22.235663,-54.8179462",Mestre Guerreiro,67 9849-4129,Associação de Capoeira Baiana,Seg Quar Sext 19:30-21:00,02/05/2026
+TRUE,CT.Corpomente Aulas Boxe Muay Thai,"R. Manoel Rasselem - Jardim Rasslem, Dourados - MS, 79813-070","P5WP+5J Jardim Rasslem, Dourados - MS","-22.2545808,-54.8182539",Mestre Cyborg,67 98124-8862,Capoarti,"Infantil: Ter, Qui 7h-9h | 12 anos+ : 15h-16h | Adulto: 21h-22:30",03/05/2026
+TRUE,Praça Izidro Pedroso,"R. Mozart Calheiros - Izidro Pedroso, Dourados - MS, 79811-010","Q655+HR Izidro Pedroso, Dourados - MS","-22.2415336,-54.8017818",Mestre Cyborg,67 98124-8862,Capoarti,Dom 9:30h,04/05/2026
+TRUE,Seleta,"Av. José Roberto Teixeira, 132-272 - Jardim Florida, Dourados - MS, 79822-090","Q5F7+FV Jardim Florida, Dourados - MS","-22.2262271,-54.8382184",Instrutor Ramão,67 98448-8619,Camará,"Ter, Quin 19-21",05/05/2026
+TRUE,AJI - Ação dos Jovens Indígenas de Dourados - MS,Aldeia Bororó,,"-22.1638911,-54.864631",Bruno Grãos,67 98187-9226,Capoeira Angola (Centro Cultural Grãos),,06/05/2026
+TRUE,Parque Antenor Martins,"R. Ver. Vitório José Pederivaa - Vila Popular, Dourados - MS, 79822-261",,"-22.2281964,-54.8346957",Bruno Grãos,67 98187-9226,Capoeira Angola (Centro Cultural Grãos),,07/05/2026
+FALSE,,Izidro Pedroso,,,Professor Cruel,67 99193-8888,Capoarti,,
+FALSE,SIMTED Dourados,"R. Maria da Glória, 670 - Vila Industrial, Dourados - MS, 79840-150","Q698+G5 Vila Industrial, Dourados - MS",,Mestre Macaúba,,Grupo Malungo,,
+FALSE,,Escola Abigail,,,Mestre Cyborg,67 98124-8862,Capoarti,,
+FALSE,,"Praça da Juventude, Parque das Nações",,,Instrutor Junior,67 99991-3960,Abada,,
+FALSE,,"Instituto Fuziy: R. Ramão Osório, 485 - Vila Sao Braz",,,Coordenadora Patricia,,Abada,,
+FALSE,,Centro Comunitário Jardim Italia,,,Bruce Lee,,Ginga Paulista,,

@@ -313,32 +313,6 @@ function criarAvisoNaoEncontrado(ponto) {
   return cartao;
 }
 
-function criarLegenda() {
-  var legenda = document.createElement("div");
-  legenda.id = "legenda";
-
-  var itens = [
-    { cor: "#009739", nome: "Capoeira" },
-    { cor: "#CE1126", nome: "Camará" },
-    { cor: "#D4A017", nome: "Angola" },
-    { cor: "#002776", nome: "Outros" },
-  ];
-
-  itens.forEach(function (item) {
-    var el = document.createElement("div");
-    el.className = "item-legenda";
-    el.innerHTML =
-      '<div class="ponto" style="background:' +
-      item.cor +
-      '"></div><span>' +
-      item.nome +
-      "</span>";
-    legenda.appendChild(el);
-  });
-
-  return legenda;
-}
-
 function combinarFiltro(ponto) {
   if (!textoBusca) return true;
   var texto = textoBusca.toLowerCase();
@@ -384,10 +358,6 @@ function renderizarLista() {
   filtrados.forEach(function (item) {
     lista.appendChild(criarCartao(item.ponto, item.marcador, item.cor));
   });
-
-  if (filtrados.length > 0) {
-    lista.appendChild(criarLegenda());
-  }
 }
 
 function filtrarLocais() {

@@ -165,10 +165,10 @@ function criarMapa() {
 function criarIcone() {
   return L.divIcon({
     className: "marcador-personalizado",
-    html: '<img src="cabaca.svg" style="width:40px;height:40px;" />',
+    html: '<img src="pino-mapa.svg" style="width:40px;height:40px;" />',
     iconSize: [40, 40],
-    iconAnchor: [20, 20],
-    popupAnchor: [0, -24],
+    iconAnchor: [20, 40],
+    popupAnchor: [0, -44],
   });
 }
 

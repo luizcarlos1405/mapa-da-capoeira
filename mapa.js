@@ -287,7 +287,7 @@ function criarCartao(ponto, marcador, cor) {
     mapaGlobal.setView(latlng, 16);
     marcador.openPopup();
     if (window.innerWidth <= 768) {
-      document.getElementById("painel").classList.add("fechado");
+      fecharPainel();
     }
   };
 
@@ -534,10 +534,6 @@ async function inicializarMapa() {
       ARQUIVO_DADOS +
       " existe.</span></div></div>";
   }
-}
-
-if (window.innerWidth <= 768) {
-  document.getElementById("painel").classList.add("fechado");
 }
 
 document.getElementById("busca-movel").addEventListener("click", function (e) {

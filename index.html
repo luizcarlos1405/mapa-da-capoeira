@@ -18,7 +18,7 @@
   </head>
   <body>
     <div id="aplicativo">
-      <aside id="painel">
+      <aside id="painel" class="fechado">
         <header id="cabecalho-painel">
           <img
             class="icone-berimbau"
@@ -36,10 +36,15 @@
         </header>
 
         <div id="cabecalho-movel">
-          <div class="alca"></div>
           <div class="cabecalho-movel-conteudo">
             <h2>Locais de Treino</h2>
             <span id="contagem-movel" class="selo-contagem">0</span>
+            <button class="btn-fechar-painel" onclick="fecharPainel()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
           </div>
         </div>
 
@@ -120,7 +125,7 @@
             placeholder="Buscar local de treino..."
             oninput="filtrarLocaisMovel()"
           />
-          <button id="btn-abrir-painel" onclick="alternarPainel()">
+          <button id="btn-abrir-painel" onclick="abrirPainel()">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20"

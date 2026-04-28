@@ -383,8 +383,12 @@ function definirFiltro(botao, campo) {
   renderizarLista();
 }
 
-function alternarPainel() {
-  document.getElementById("painel").classList.toggle("fechado");
+function abrirPainel() {
+  document.getElementById("painel").classList.remove("fechado");
+}
+
+function fecharPainel() {
+  document.getElementById("painel").classList.add("fechado");
 }
 
 function extrairCoordenadas(ponto) {
@@ -531,5 +535,15 @@ async function inicializarMapa() {
       " existe.</span></div></div>";
   }
 }
+
+if (window.innerWidth <= 768) {
+  document.getElementById("painel").classList.add("fechado");
+}
+
+document.getElementById("busca-movel").addEventListener("click", function (e) {
+  e.stopPropagation();
+  abrirPainel();
+});
+document.getElementById("area-mapa").addEventListener("click", fecharPainel);
 
 inicializarMapa();

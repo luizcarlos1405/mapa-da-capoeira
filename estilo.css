@@ -512,29 +512,33 @@ body {
   #cabecalho-movel {
     display: flex;
     flex-direction: column;
-    padding: 8px 20px 0;
-  }
-
-  .alca {
-    width: 40px;
-    height: 4px;
-    background: #c8c4b8;
-    border-radius: 2px;
-    margin: 0 auto 12px;
+    padding: 12px 16px 0;
   }
 
   .cabecalho-movel-conteudo {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 8px;
     padding-bottom: 12px;
   }
 
   .cabecalho-movel-conteudo h2 {
+    flex: 1;
     font-family: "Anton", sans-serif;
     font-size: 20px;
     font-weight: 400;
     color: var(--texto);
+  }
+
+  .btn-fechar-painel {
+    border: none;
+    background: none;
+    color: var(--texto-secundario);
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
   }
 
   .selo-contagem {

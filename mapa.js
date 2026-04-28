@@ -346,9 +346,7 @@ function combinarFiltro(ponto) {
   switch (campoFiltro) {
     case "nome":
       return (
-        (ponto["Nome do Endereço"] || "")
-          .toLowerCase()
-          .indexOf(texto) >= 0 ||
+        (ponto["Nome do Endereço"] || "").toLowerCase().indexOf(texto) >= 0 ||
         (ponto["Endereço"] || "").toLowerCase().indexOf(texto) >= 0
       );
     case "grupo":
@@ -360,11 +358,10 @@ function combinarFiltro(ponto) {
     default:
       return (
         (ponto["Grupo"] || "").toLowerCase().indexOf(texto) >= 0 ||
-        (ponto["Nome do Responsável"] || "").toLowerCase().indexOf(texto) >= 0 ||
+        (ponto["Nome do Responsável"] || "").toLowerCase().indexOf(texto) >=
+          0 ||
         (ponto["Endereço"] || "").toLowerCase().indexOf(texto) >= 0 ||
-        (ponto["Telefone de Contato"] || "")
-          .toLowerCase()
-          .indexOf(texto) >= 0
+        (ponto["Telefone de Contato"] || "").toLowerCase().indexOf(texto) >= 0
       );
   }
 }
@@ -464,7 +461,9 @@ async function inicializarMapa() {
 
     var texto = await resposta.text();
     var pontos = parsearCSV(texto).filter(function (p) {
-      return p["Mostrar no Mapa"] && p["Mostrar no Mapa"].toUpperCase() === "TRUE";
+      return (
+        p["Mostrar no Mapa"] && p["Mostrar no Mapa"].toUpperCase() === "TRUE"
+      );
     });
 
     var comCoords = [];
@@ -498,9 +497,7 @@ async function inicializarMapa() {
     renderizarLista();
 
     if (marcadores.length > 0) {
-      mapaGlobal.fitBounds(
-        L.featureGroup(marcadores).getBounds().pad(0.2),
-      );
+      mapaGlobal.fitBounds(L.featureGroup(marcadores).getBounds().pad(0.2));
     }
 
     if (carregando) carregando.classList.add("escondido");
@@ -534,14 +531,10 @@ async function inicializarMapa() {
         });
 
         if (marcadores.length === 1) {
-          mapaGlobal.fitBounds(
-            L.featureGroup(marcadores).getBounds().pad(0.2),
-          );
+          mapaGlobal.fitBounds(L.featureGroup(marcadores).getBounds().pad(0.2));
         }
       } else {
-        console.warn(
-          'Endereço não encontrado: "' + pontoSem["Endereço"] + '"',
-        );
+        console.warn('Endereço não encontrado: "' + pontoSem["Endereço"] + '"');
         todosLocais.push({
           ponto: pontoSem,
           marcador: null,

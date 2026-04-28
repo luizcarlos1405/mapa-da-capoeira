@@ -4,6 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mapa da Capoeira</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
     <link
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -11,19 +17,137 @@
     <link rel="stylesheet" href="estilo.css" />
   </head>
   <body>
-    <div id="mapa"></div>
+    <div id="aplicativo">
+      <aside id="painel">
+        <header id="cabecalho-painel">
+          <div class="titulo-linha">
+            <svg
+              class="icone-berimbau"
+              viewBox="0 0 36 36"
+              width="36"
+              height="36"
+            >
+              <path
+                d="M18 2c-0.5 0-1 0.3-1 1l0 25c0 0-5 2-5 5l2 0c0-2 3-3.5 3-3.5l0 4.5 2 0 0-31c0-0.7-0.5-1-1-1z m-10 12l10-6 0 2-10 6z"
+                fill="#FEDD00"
+              />
+            </svg>
+            <h1>Mapa da Capoeira</h1>
+          </div>
+          <p class="subtitulo">Encontre locais de treino perto de você</p>
+          <div class="faixa-bandeira">
+            <span></span><span></span><span></span><span></span><span></span><span></span>
+          </div>
+        </header>
 
-    <div id="cabecalho">
-      <h1>Mapa da Capoeira</h1>
+        <div id="cabecalho-movel">
+          <div class="alca"></div>
+          <div class="cabecalho-movel-conteudo">
+            <h2>Locais de Treino</h2>
+            <span id="contagem-movel" class="selo-contagem">0</span>
+          </div>
+        </div>
+
+        <div id="container-busca">
+          <div id="campo-busca">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.3-4.3"></path>
+            </svg>
+            <input
+              type="text"
+              id="entrada-busca"
+              placeholder="Buscar por nome, grupo ou responsável..."
+              oninput="filtrarLocais()"
+            />
+          </div>
+          <div id="abas-filtro">
+            <button
+              class="aba ativa"
+              onclick="definirFiltro(this, 'todos')"
+            >
+              Todos
+            </button>
+            <button class="aba" onclick="definirFiltro(this, 'nome')">
+              Nome
+            </button>
+            <button class="aba" onclick="definirFiltro(this, 'grupo')">
+              Grupo
+            </button>
+            <button
+              class="aba"
+              onclick="definirFiltro(this, 'responsavel')"
+            >
+              Responsável
+            </button>
+          </div>
+        </div>
+
+        <div id="lista-locais">
+          <p id="contagem-resultados"></p>
+        </div>
+
+        <footer id="rodape-painel">
+          Dados de domínio público · OpenStreetMap
+        </footer>
+      </aside>
+
+      <main id="area-mapa">
+        <div id="mapa"></div>
+        <div id="busca-movel">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.3-4.3"></path>
+          </svg>
+          <input
+            type="text"
+            id="entrada-busca-movel"
+            placeholder="Buscar local de treino..."
+            oninput="filtrarLocaisMovel()"
+          />
+          <button id="btn-abrir-painel" onclick="alternarPainel()">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="4" x2="20" y1="12" y2="12"></line>
+              <line x1="4" x2="20" y1="6" y2="6"></line>
+              <line x1="4" x2="20" y1="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </main>
     </div>
 
-    <button id="btn-painel" onclick="alternarPainel()" title="Lista de locais">
-      ☰
-    </button>
-
-    <div id="painel">
-      <h2>Locais de Treino</h2>
-      <div id="lista-locais"></div>
+    <div id="carregando">
+      <div class="spinner"></div>
     </div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>

@@ -53,6 +53,13 @@ function corDoGrupo() {
   return CORES_GRUPO[0];
 }
 
+function embaralhar(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
 function parsearCSV(texto) {
   var linhas = texto
     .replace(/\r\n/g, "\n")
@@ -348,6 +355,7 @@ function renderizarLista() {
   lista.innerHTML = "";
   lista.appendChild(contagem);
 
+  embaralhar(todosLocais);
   var filtrados = todosLocais.filter(function (item) {
     return combinarFiltro(item.ponto);
   });

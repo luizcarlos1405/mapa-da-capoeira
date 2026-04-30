@@ -49,6 +49,36 @@ function iconeCalendario(tam) {
   );
 }
 
+function iconeInstagram(tam) {
+  return iconeSVG(
+    '<rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>',
+    tam,
+  );
+}
+
+function extrairHandleInstagram(url) {
+  if (!url || !url.trim()) return null;
+  var match = url.match(/instagram\.com\/([^/?\s]+)/);
+  if (match && match[1]) return "@" + match[1];
+  return null;
+}
+
+function linkWhatsApp(telefone) {
+  if (!telefone) return null;
+  var numeros = telefone.replace(/\D/g, "");
+  if (numeros.length < 10) return null;
+  if (!numeros.startsWith("55")) numeros = "55" + numeros;
+  return "https://wa.me/" + numeros;
+}
+
+function linkGoogleMaps(nome) {
+  if (!nome) return null;
+  return (
+    "https://www.google.com/maps/search/?api=1&query=" +
+    encodeURIComponent(nome)
+  );
+}
+
 function corDoGrupo() {
   return CORES_GRUPO[0];
 }
@@ -194,17 +224,39 @@ function conteudoPopup(ponto) {
   html +=
     '<div class="popup-linha">' +
     iconeLocalizacao(14) +
-    '<span class="texto-endereco">' +
+    '<a class="texto-endereco" href="' +
+    linkGoogleMaps(ponto["Nome do Endereço"] || ponto["Endereço"]) +
+    '" target="_blank" rel="noopener">' +
     ponto["Endereço"] +
-    "</span></div>";
+    "</a></div>";
 
   if (ponto["Telefone de Contato"]) {
+    var linkZap = linkWhatsApp(ponto["Telefone de Contato"]);
     html +=
       '<div class="popup-linha">' +
       iconeTelefone(14) +
-      '<span class="texto-telefone">' +
-      ponto["Telefone de Contato"] +
-      "</span></div>";
+      (linkZap
+        ? '<a class="texto-telefone" href="' +
+          linkZap +
+          '" target="_blank" rel="noopener">' +
+          ponto["Telefone de Contato"] +
+          "</a>"
+        : '<span class="texto-telefone">' +
+          ponto["Telefone de Contato"] +
+          "</span>") +
+      "</div>";
+  }
+
+  var handleIg = extrairHandleInstagram(ponto["Instagram"]);
+  if (handleIg) {
+    html +=
+      '<div class="popup-linha">' +
+      iconeInstagram(14) +
+      '<a class="texto-instagram" href="' +
+      ponto["Instagram"] +
+      '" target="_blank" rel="noopener">' +
+      handleIg +
+      "</a></div>";
   }
 
   if (ponto["Horários de Treino"]) {
@@ -254,17 +306,39 @@ function criarCartao(ponto, marcador, cor) {
   html +=
     '<div class="cartao-detalhe">' +
     iconeLocalizacao(14) +
-    '<span class="texto-endereco">' +
+    '<a class="texto-endereco" href="' +
+    linkGoogleMaps(ponto["Nome do Endereço"] || ponto["Endereço"]) +
+    '" target="_blank" rel="noopener">' +
     ponto["Endereço"] +
-    "</span></div>";
+    "</a></div>";
 
   if (ponto["Telefone de Contato"]) {
+    var linkZap = linkWhatsApp(ponto["Telefone de Contato"]);
     html +=
       '<div class="cartao-detalhe">' +
       iconeTelefone(14) +
-      '<span class="texto-telefone">' +
-      ponto["Telefone de Contato"] +
-      "</span></div>";
+      (linkZap
+        ? '<a class="texto-telefone" href="' +
+          linkZap +
+          '" target="_blank" rel="noopener">' +
+          ponto["Telefone de Contato"] +
+          "</a>"
+        : '<span class="texto-telefone">' +
+          ponto["Telefone de Contato"] +
+          "</span>") +
+      "</div>";
+  }
+
+  var handleIg = extrairHandleInstagram(ponto["Instagram"]);
+  if (handleIg) {
+    html +=
+      '<div class="cartao-detalhe">' +
+      iconeInstagram(14) +
+      '<a class="texto-instagram" href="' +
+      ponto["Instagram"] +
+      '" target="_blank" rel="noopener">' +
+      handleIg +
+      "</a></div>";
   }
 
   if (ponto["Horários de Treino"]) {
@@ -342,7 +416,8 @@ function combinarFiltro(ponto) {
         (ponto["Nome do Responsável"] || "").toLowerCase().indexOf(texto) >=
           0 ||
         (ponto["Endereço"] || "").toLowerCase().indexOf(texto) >= 0 ||
-        (ponto["Telefone de Contato"] || "").toLowerCase().indexOf(texto) >= 0
+        (ponto["Telefone de Contato"] || "").toLowerCase().indexOf(texto) >= 0 ||
+        (ponto["Instagram"] || "").toLowerCase().indexOf(texto) >= 0
       );
   }
 }

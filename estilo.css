@@ -264,10 +264,32 @@ body {
 .cartao-detalhe .texto-endereco {
   font-size: 12px;
   color: var(--texto-discreto);
+  text-decoration: none;
+}
+
+.cartao-detalhe .texto-endereco:hover {
+  text-decoration: underline;
 }
 
 .cartao-detalhe .texto-telefone {
   font-size: 12px;
+  color: var(--texto-discreto);
+  text-decoration: none;
+}
+
+.cartao-detalhe .texto-telefone:hover {
+  text-decoration: underline;
+}
+
+.cartao-detalhe .texto-instagram {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--texto-discreto);
+  text-decoration: none;
+}
+
+.cartao-detalhe .texto-instagram:hover {
+  text-decoration: underline;
   color: var(--texto-discreto);
 }
 
@@ -401,11 +423,32 @@ body {
 .popup-linha .texto-endereco {
   font-size: 11px;
   color: var(--texto-secundario);
+  text-decoration: none;
+}
+
+.popup-linha .texto-endereco:hover {
+  text-decoration: underline;
 }
 
 .popup-linha .texto-telefone {
   font-size: 11px;
   color: var(--texto-secundario);
+  text-decoration: none;
+}
+
+.popup-linha .texto-telefone:hover {
+  text-decoration: underline;
+}
+
+.popup-linha .texto-instagram {
+  font-size: 11px;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--texto-secundario);
+}
+
+.popup-linha .texto-instagram:hover {
+  text-decoration: underline;
 }
 
 .popup-horario {

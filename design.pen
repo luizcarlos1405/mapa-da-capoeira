@@ -1,1 +1,543 @@
-{"version":"2.11","variables":{"surface-primary":{"type":"color","value":"#FAF9F5FF"},"surface-secondary":{"type":"color","value":"#F0EDE5FF"},"surface-card":{"type":"color","value":"#FFFFFFFF"},"foreground-primary":{"type":"color","value":"#1A1A1AFF"},"foreground-secondary":{"type":"color","value":"#4A4A4AFF"},"foreground-muted":{"type":"color","value":"#8C8782FF"},"border-subtle":{"type":"color","value":"#E0DDD5FF"},"accent-green":{"type":"color","value":"#009739FF"},"accent-yellow":{"type":"color","value":"#FEDD00FF"},"accent-blue":{"type":"color","value":"#002776FF"},"accent-red":{"type":"color","value":"#CE1126FF"},"accent-gold":{"type":"color","value":"#D4A017FF"},"shadow-color":{"type":"color","value":"#00000012"}},"children":[]}
+{
+  "version": "2.11",
+  "children": [
+    {
+      "type": "frame",
+      "id": "VoDhT",
+      "x": 0,
+      "y": 0,
+      "name": "Sidebar Card with Instagram",
+      "width": 360,
+      "fill": "#FAF9F5",
+      "layout": "vertical",
+      "gap": 10,
+      "padding": 20,
+      "children": [
+        {
+          "type": "frame",
+          "id": "mxbHQ",
+          "name": "Card",
+          "width": "fill_container",
+          "fill": "#FFFFFF",
+          "cornerRadius": 10,
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#00000008",
+            "offset": {
+              "x": 0,
+              "y": 2
+            },
+            "blur": 8
+          },
+          "layout": "vertical",
+          "gap": 8,
+          "padding": 16,
+          "children": [
+            {
+              "type": "frame",
+              "id": "XeDVc",
+              "name": "card-header",
+              "width": "fill_container",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "ellipse",
+                  "id": "GLzlk",
+                  "name": "group-dot",
+                  "fill": "#009739",
+                  "width": 10,
+                  "height": 10
+                },
+                {
+                  "type": "text",
+                  "id": "NtZlP",
+                  "name": "group-name",
+                  "fill": "#1A1A1A",
+                  "content": "Associação de Capoeira Baiana",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "600"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "xz88S",
+              "name": "detail-person",
+              "width": "fill_container",
+              "gap": 6,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "v0hZc",
+                  "name": "icon-user",
+                  "width": 14,
+                  "height": 14,
+                  "iconFontName": "user",
+                  "iconFontFamily": "lucide",
+                  "fill": "#8C8782"
+                },
+                {
+                  "type": "text",
+                  "id": "OxdnP",
+                  "name": "responsible",
+                  "fill": "#4A4A4A",
+                  "content": "Mestre Guerreiro",
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "8nrgE",
+              "name": "detail-location",
+              "width": "fill_container",
+              "gap": 6,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "S6y8v",
+                  "name": "icon-map-pin",
+                  "width": 14,
+                  "height": 14,
+                  "iconFontName": "map-pin",
+                  "iconFontFamily": "lucide",
+                  "fill": "#8C8782"
+                },
+                {
+                  "type": "text",
+                  "id": "Km8mT",
+                  "name": "address",
+                  "fill": "#8C8782",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "R. Independência, 285 - Jardim Italia, Dourados - MS",
+                  "fontFamily": "Inter",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "2ptBN",
+              "name": "detail-phone",
+              "width": "fill_container",
+              "gap": 6,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "jVwpx",
+                  "name": "icon-phone",
+                  "width": 14,
+                  "height": 14,
+                  "iconFontName": "phone",
+                  "iconFontFamily": "lucide",
+                  "fill": "#8C8782"
+                },
+                {
+                  "type": "text",
+                  "id": "uMGxi",
+                  "name": "phone-text",
+                  "fill": "#8C8782",
+                  "content": "67 9849-4129",
+                  "fontFamily": "Inter",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "foLg6",
+              "name": "detail-instagram",
+              "width": "fill_container",
+              "gap": 6,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "RsxUt",
+                  "name": "icon-instagram",
+                  "width": 14,
+                  "height": 14,
+                  "iconFontName": "instagram",
+                  "iconFontFamily": "lucide",
+                  "fill": "#8C8782"
+                },
+                {
+                  "type": "text",
+                  "id": "QK88d",
+                  "name": "instagram-handle",
+                  "fill": "#8C8782",
+                  "content": "@mestreguerreiroms",
+                  "fontFamily": "Inter",
+                  "fontSize": 12,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "aiFMg",
+              "name": "schedule-row",
+              "width": "fill_container",
+              "fill": "#0097390d",
+              "cornerRadius": 6,
+              "gap": 6,
+              "padding": [
+                6,
+                10
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "Wpldm",
+                  "name": "icon-calendar",
+                  "width": 13,
+                  "height": 13,
+                  "iconFontName": "calendar",
+                  "iconFontFamily": "lucide",
+                  "fill": "#009739"
+                },
+                {
+                  "type": "text",
+                  "id": "Pngpf",
+                  "name": "schedule-text",
+                  "fill": "#009739",
+                  "content": "Seg, Quar, Sex 19:30h-21h",
+                  "fontFamily": "Inter",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "iDI8s",
+          "name": "label",
+          "fill": "#8C8782",
+          "content": "← Sidebar card · Popup →",
+          "fontFamily": "Inter",
+          "fontSize": 11,
+          "fontWeight": "600",
+          "letterSpacing": 1
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "xOKz5",
+      "x": 420,
+      "y": 0,
+      "name": "Map Popup with Instagram",
+      "width": 280,
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "GEXJH",
+          "name": "popup-header",
+          "width": "fill_container",
+          "fill": {
+            "type": "gradient",
+            "gradientType": "linear",
+            "enabled": true,
+            "rotation": 180,
+            "size": {
+              "height": 1
+            },
+            "colors": [
+              {
+                "color": "#006B2D",
+                "position": 0
+              },
+              {
+                "color": "#009739",
+                "position": 1
+              }
+            ]
+          },
+          "layout": "vertical",
+          "padding": [
+            14,
+            16,
+            10,
+            16
+          ],
+          "children": [
+            {
+              "type": "text",
+              "id": "v8FKI",
+              "name": "popup-group-name",
+              "fill": "#FFFFFF",
+              "content": "Associação de Capoeira Baiana",
+              "fontFamily": "Anton",
+              "fontSize": 16
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "9JOJ4",
+          "name": "popup-body",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 8,
+          "padding": [
+            12,
+            16,
+            14,
+            16
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "gZMwK",
+              "name": "pop-person",
+              "width": "fill_container",
+              "gap": 6,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "Hle7G",
+                  "name": "pi1",
+                  "width": 14,
+                  "height": 14,
+                  "iconFontName": "user",
+                  "iconFontFamily": "lucide",
+                  "fill": "#8C8782"
+                },
+                {
+                  "type": "text",
+                  "id": "HAWDm",
+                  "name": "pt1",
+                  "fill": "#1A1A1A",
+                  "content": "Mestre Guerreiro",
+                  "fontFamily": "Inter",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "eK1Hk",
+              "name": "pop-location",
+              "width": "fill_container",
+              "gap": 6,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "fbsCL",
+                  "name": "pi2",
+                  "width": 14,
+                  "height": 14,
+                  "iconFontName": "map-pin",
+                  "iconFontFamily": "lucide",
+                  "fill": "#8C8782"
+                },
+                {
+                  "type": "text",
+                  "id": "sqftx",
+                  "name": "pt2",
+                  "fill": "#4A4A4A",
+                  "content": "R. Independência, 285 - Jardim Italia",
+                  "fontFamily": "Inter",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "j1GlV",
+              "name": "pop-phone",
+              "width": "fill_container",
+              "gap": 6,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "DBVLx",
+                  "name": "pi3",
+                  "width": 14,
+                  "height": 14,
+                  "iconFontName": "phone",
+                  "iconFontFamily": "lucide",
+                  "fill": "#8C8782"
+                },
+                {
+                  "type": "text",
+                  "id": "pH23z",
+                  "name": "pt3",
+                  "fill": "#4A4A4A",
+                  "content": "67 9849-4129",
+                  "fontFamily": "Inter",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "QTDBO",
+              "name": "pop-instagram",
+              "width": "fill_container",
+              "gap": 6,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "mkaJJ",
+                  "name": "pi4",
+                  "width": 14,
+                  "height": 14,
+                  "iconFontName": "instagram",
+                  "iconFontFamily": "lucide",
+                  "fill": "#8C8782"
+                },
+                {
+                  "type": "text",
+                  "id": "EFqPF",
+                  "name": "pt4",
+                  "fill": "#8C8782",
+                  "content": "@mestreguerreiroms",
+                  "fontFamily": "Inter",
+                  "fontSize": 11,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "6MBzs",
+              "name": "popup-schedule",
+              "width": "fill_container",
+              "fill": "#0097390d",
+              "cornerRadius": 6,
+              "layout": "vertical",
+              "gap": 4,
+              "padding": [
+                6,
+                10
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "U7kJU",
+                  "name": "sched-text",
+                  "fill": "#009739",
+                  "content": "Seg, Quar, Sex 19:30h - 21h",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "9gnUs",
+          "name": "popup-stripe",
+          "width": "fill_container",
+          "height": 4,
+          "children": [
+            {
+              "type": "rectangle",
+              "id": "x7Mxh",
+              "name": "stripe-yellow",
+              "fill": "#FEDD00",
+              "width": "fill_container",
+              "height": 4
+            },
+            {
+              "type": "rectangle",
+              "id": "tpH47",
+              "name": "stripe-green",
+              "fill": "#009739",
+              "width": "fill_container",
+              "height": 4
+            },
+            {
+              "type": "rectangle",
+              "id": "pBbQG",
+              "name": "stripe-red",
+              "fill": "#CE1126",
+              "width": "fill_container",
+              "height": 4
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variables": {
+    "surface-primary": {
+      "type": "color",
+      "value": "#FAF9F5FF"
+    },
+    "surface-secondary": {
+      "type": "color",
+      "value": "#F0EDE5FF"
+    },
+    "surface-card": {
+      "type": "color",
+      "value": "#FFFFFFFF"
+    },
+    "foreground-primary": {
+      "type": "color",
+      "value": "#1A1A1AFF"
+    },
+    "foreground-secondary": {
+      "type": "color",
+      "value": "#4A4A4AFF"
+    },
+    "foreground-muted": {
+      "type": "color",
+      "value": "#8C8782FF"
+    },
+    "border-subtle": {
+      "type": "color",
+      "value": "#E0DDD5FF"
+    },
+    "accent-green": {
+      "type": "color",
+      "value": "#009739FF"
+    },
+    "accent-yellow": {
+      "type": "color",
+      "value": "#FEDD00FF"
+    },
+    "accent-blue": {
+      "type": "color",
+      "value": "#002776FF"
+    },
+    "accent-red": {
+      "type": "color",
+      "value": "#CE1126FF"
+    },
+    "accent-gold": {
+      "type": "color",
+      "value": "#D4A017FF"
+    },
+    "shadow-color": {
+      "type": "color",
+      "value": "#00000012"
+    }
+  }
+}

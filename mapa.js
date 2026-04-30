@@ -221,13 +221,17 @@ function conteudoPopup(ponto) {
     ponto["Nome do Responsável"] +
     "</span></div>";
 
+  var partesEndereco = [];
+  if (ponto["Nome do Endereço"] && ponto["Nome do Endereço"].trim()) partesEndereco.push("<strong>" + ponto["Nome do Endereço"] + "</strong>");
+  if (ponto["Endereço"] && ponto["Endereço"].trim()) partesEndereco.push(ponto["Endereço"]);
+  var textoEndereco = partesEndereco.join("<br>");
   html +=
     '<div class="popup-linha">' +
     iconeLocalizacao(14) +
     '<a class="texto-endereco" href="' +
     linkGoogleMaps(ponto["Nome do Endereço"] || ponto["Endereço"]) +
     '" target="_blank" rel="noopener">' +
-    ponto["Endereço"] +
+    textoEndereco +
     "</a></div>";
 
   if (ponto["Telefone de Contato"]) {
@@ -303,13 +307,17 @@ function criarCartao(ponto, marcador, cor) {
     ponto["Nome do Responsável"] +
     "</span></div>";
 
+  var partesEndereco = [];
+  if (ponto["Nome do Endereço"] && ponto["Nome do Endereço"].trim()) partesEndereco.push("<strong>" + ponto["Nome do Endereço"] + "</strong>");
+  if (ponto["Endereço"] && ponto["Endereço"].trim()) partesEndereco.push(ponto["Endereço"]);
+  var textoEndereco = partesEndereco.join("<br>");
   html +=
     '<div class="cartao-detalhe">' +
     iconeLocalizacao(14) +
     '<a class="texto-endereco" href="' +
     linkGoogleMaps(ponto["Nome do Endereço"] || ponto["Endereço"]) +
     '" target="_blank" rel="noopener">' +
-    ponto["Endereço"] +
+    textoEndereco +
     "</a></div>";
 
   if (ponto["Telefone de Contato"]) {
@@ -389,7 +397,12 @@ function criarAvisoNaoEncontrado(ponto) {
     '<div class="cartao-detalhe">' +
     iconeLocalizacao(14) +
     '<span class="texto-endereco">' +
-    ponto["Endereço"] +
+    (function () {
+      var p = [];
+      if (ponto["Nome do Endereço"] && ponto["Nome do Endereço"].trim()) p.push("<strong>" + ponto["Nome do Endereço"] + "</strong>");
+      if (ponto["Endereço"] && ponto["Endereço"].trim()) p.push(ponto["Endereço"]);
+      return p.join("<br>");
+    })() +
     "</span></div>";
   return cartao;
 }

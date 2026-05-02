@@ -39,6 +39,8 @@ Current columns: `Mostrar no Mapa`, `Nome do Endereço`, `Endereço`, `Plus Code
 - All variable names, function names, and UI text are in **Brazilian Portuguese**
 - No comments in code unless explicitly requested
 - Leaflet.js and its CSS are loaded from unpkg CDN — no local node_modules
+- Use `const` by default, `let` only when reassignment is needed — never `var`
+- Code is formatted with **Prettier** (2-space indent, double quotes, trailing commas)
 
 ## Key architecture details
 

@@ -16,6 +16,7 @@ const ICONE = {
     '<rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/>',
   INSTAGRAM:
     '<rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>',
+  WHATSAPP: '<path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/>',
 };
 
 const COLUNAS = {
@@ -68,6 +69,74 @@ function iconeCalendario(tam) {
 
 function iconeInstagram(tam) {
   return iconeSVG(ICONE.INSTAGRAM, tam);
+}
+
+function iconeWhatsApp(tam) {
+  return iconeSVG(ICONE.WHATSAPP, tam);
+}
+
+function botoesAcao(ponto, contexto) {
+  const botoes = [];
+  const tel = ponto[COLUNAS.TELEFONE];
+
+  if (tel && tel.replace(/\D/g, "").length >= 8) {
+    let telNumeros = tel.replace(/\D/g, "");
+    if (!telNumeros.startsWith("55")) telNumeros = "55" + telNumeros;
+    botoes.push({
+      icone: iconeTelefone(14),
+      rotulo: "Ligar",
+      link: "tel:+" + telNumeros,
+    });
+  }
+
+  const endereco = ponto[COLUNAS.NOME_ENDERECO] || ponto[COLUNAS.ENDERECO];
+  if (endereco && endereco.trim()) {
+    botoes.push({
+      icone: iconeLocalizacao(14),
+      rotulo: "Como chegar",
+      link: linkGoogleMaps(endereco),
+    });
+  }
+
+  const handleIg = extrairHandleInstagram(ponto[COLUNAS.INSTAGRAM]);
+  if (handleIg) {
+    botoes.push({
+      icone: iconeInstagram(14),
+      rotulo: "Instagram",
+      link: ponto[COLUNAS.INSTAGRAM],
+    });
+  }
+
+  const linkZap = linkWhatsApp(tel);
+  if (linkZap) {
+    botoes.push({
+      icone: iconeWhatsApp(14),
+      rotulo: "Whatsapp",
+      link: linkZap,
+    });
+  }
+
+  if (botoes.length === 0) return "";
+
+  const stopProp =
+    contexto !== "popup" ? ' onclick="event.stopPropagation()"' : "";
+
+  let html = '<div class="botoes-acao-separador"></div>';
+  html += '<div class="botoes-acao">';
+  botoes.forEach(function (btn) {
+    html +=
+      '<a class="botao-acao" href="' +
+      btn.link +
+      '" target="_blank" rel="noopener"' +
+      stopProp +
+      ">" +
+      btn.icone +
+      "<span>" +
+      btn.rotulo +
+      "</span></a>";
+  });
+  html += "</div>";
+  return html;
 }
 
 function extrairHandleInstagram(url) {
@@ -246,27 +315,17 @@ function conteudoPopup(ponto) {
   html +=
     '<div class="popup-linha">' +
     iconeLocalizacao(14) +
-    '<a class="texto-endereco" href="' +
-    linkGoogleMaps(ponto[COLUNAS.NOME_ENDERECO] || ponto[COLUNAS.ENDERECO]) +
-    '" target="_blank" rel="noopener">' +
+    '<span class="texto-endereco">' +
     textoEndereco +
-    "</a></div>";
+    "</span></div>";
 
   if (ponto[COLUNAS.TELEFONE]) {
-    const linkZap = linkWhatsApp(ponto[COLUNAS.TELEFONE]);
     html +=
       '<div class="popup-linha">' +
       iconeTelefone(14) +
-      (linkZap
-        ? '<a class="texto-telefone" href="' +
-          linkZap +
-          '" target="_blank" rel="noopener">' +
-          ponto[COLUNAS.TELEFONE] +
-          "</a>"
-        : '<span class="texto-telefone">' +
-          ponto[COLUNAS.TELEFONE] +
-          "</span>") +
-      "</div>";
+      '<span class="texto-telefone">' +
+      ponto[COLUNAS.TELEFONE] +
+      "</span></div>";
   }
 
   const handleIg = extrairHandleInstagram(ponto[COLUNAS.INSTAGRAM]);
@@ -274,11 +333,9 @@ function conteudoPopup(ponto) {
     html +=
       '<div class="popup-linha">' +
       iconeInstagram(14) +
-      '<a class="texto-instagram" href="' +
-      ponto[COLUNAS.INSTAGRAM] +
-      '" target="_blank" rel="noopener">' +
+      '<span class="texto-instagram">' +
       handleIg +
-      "</a></div>";
+      "</span></div>";
   }
 
   if (ponto[COLUNAS.HORARIOS]) {
@@ -295,6 +352,8 @@ function conteudoPopup(ponto) {
       html += '<div class="popup-horario">' + horarios + "</div>";
     }
   }
+
+  html += botoesAcao(ponto, "popup");
 
   html += "</div>";
   html +=
@@ -336,27 +395,17 @@ function criarCartao(ponto, marcador, cor) {
   html +=
     '<div class="cartao-detalhe">' +
     iconeLocalizacao(14) +
-    '<a class="texto-endereco" href="' +
-    linkGoogleMaps(ponto[COLUNAS.NOME_ENDERECO] || ponto[COLUNAS.ENDERECO]) +
-    '" target="_blank" rel="noopener">' +
+    '<span class="texto-endereco">' +
     textoEndereco +
-    "</a></div>";
+    "</span></div>";
 
   if (ponto[COLUNAS.TELEFONE]) {
-    const linkZap = linkWhatsApp(ponto[COLUNAS.TELEFONE]);
     html +=
       '<div class="cartao-detalhe">' +
       iconeTelefone(14) +
-      (linkZap
-        ? '<a class="texto-telefone" href="' +
-          linkZap +
-          '" target="_blank" rel="noopener">' +
-          ponto[COLUNAS.TELEFONE] +
-          "</a>"
-        : '<span class="texto-telefone">' +
-          ponto[COLUNAS.TELEFONE] +
-          "</span>") +
-      "</div>";
+      '<span class="texto-telefone">' +
+      ponto[COLUNAS.TELEFONE] +
+      "</span></div>";
   }
 
   const handleIg = extrairHandleInstagram(ponto[COLUNAS.INSTAGRAM]);
@@ -364,11 +413,9 @@ function criarCartao(ponto, marcador, cor) {
     html +=
       '<div class="cartao-detalhe">' +
       iconeInstagram(14) +
-      '<a class="texto-instagram" href="' +
-      ponto[COLUNAS.INSTAGRAM] +
-      '" target="_blank" rel="noopener">' +
+      '<span class="texto-instagram">' +
       handleIg +
-      "</a></div>";
+      "</span></div>";
   }
 
   if (ponto[COLUNAS.HORARIOS]) {
@@ -390,6 +437,8 @@ function criarCartao(ponto, marcador, cor) {
         "</span></div>";
     }
   }
+
+  html += botoesAcao(ponto, "cartao");
 
   cartao.innerHTML = html;
 

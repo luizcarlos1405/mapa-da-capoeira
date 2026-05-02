@@ -264,32 +264,16 @@ body {
 .cartao-detalhe .texto-endereco {
   font-size: 12px;
   color: var(--texto-discreto);
-  text-decoration: none;
-}
-
-.cartao-detalhe .texto-endereco:hover {
-  text-decoration: underline;
 }
 
 .cartao-detalhe .texto-telefone {
   font-size: 12px;
   color: var(--texto-discreto);
-  text-decoration: none;
-}
-
-.cartao-detalhe .texto-telefone:hover {
-  text-decoration: underline;
 }
 
 .cartao-detalhe .texto-instagram {
   font-size: 12px;
   font-weight: 500;
-  color: var(--texto-discreto);
-  text-decoration: none;
-}
-
-.cartao-detalhe .texto-instagram:hover {
-  text-decoration: underline;
   color: var(--texto-discreto);
 }
 
@@ -312,6 +296,49 @@ body {
   color: var(--verde-acento);
 }
 
+.botoes-acao-separador {
+  height: 1px;
+  background: var(--borda);
+  width: 100%;
+}
+
+.botoes-acao {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.botao-acao {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 7px 12px;
+  border-radius: 8px;
+  background: #f0f7f1;
+  color: var(--verde-acento);
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+
+.botao-acao svg {
+  color: var(--verde-acento);
+  flex-shrink: 0;
+}
+
+.leaflet-popup-content .botao-acao {
+  color: var(--verde-acento);
+  text-decoration: none;
+}
+
+.botao-acao:hover {
+  background: #e0f0e2;
+}
+
 #rodape-painel {
   padding: 10px 20px;
   background: var(--rodape-fundo);
@@ -332,51 +359,51 @@ body {
 }
 
 .leaflet-control-zoom {
-  border: none !important;
-  border-radius: 8px !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07) !important;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
   overflow: hidden;
 }
 
 .leaflet-control-zoom a {
-  width: 36px !important;
-  height: 36px !important;
-  line-height: 36px !important;
-  font-size: 18px !important;
-  color: var(--texto) !important;
-  background: var(--fundo-carta) !important;
-  border-bottom: 1px solid var(--borda) !important;
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  font-size: 18px;
+  color: var(--texto);
+  background: var(--fundo-carta);
+  border-bottom: 1px solid var(--borda);
 }
 
 .leaflet-control-zoom a:last-child {
-  border-bottom: none !important;
+  border-bottom: none;
 }
 
 .leaflet-control-zoom a:hover {
-  background: var(--fundo-secundario) !important;
+  background: var(--fundo-secundario);
 }
 
 .leaflet-popup-content-wrapper {
-  border-radius: 12px !important;
-  padding: 0 !important;
+  border-radius: 12px;
+  padding: 0;
   overflow: hidden;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
 
 .leaflet-popup-content {
-  margin: 0 !important;
-  min-width: 240px;
+  margin: 0;
+  min-width: 360px;
 }
 
 .leaflet-popup-tip {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .leaflet-popup-close-button {
-  color: rgba(255, 255, 255, 0.8) !important;
-  font-size: 20px !important;
-  top: 8px !important;
-  right: 10px !important;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 20px;
+  top: 8px;
+  right: 10px;
   z-index: 1;
 }
 
@@ -423,32 +450,17 @@ body {
 .popup-linha .texto-endereco {
   font-size: 11px;
   color: var(--texto-secundario);
-  text-decoration: none;
-}
-
-.popup-linha .texto-endereco:hover {
-  text-decoration: underline;
 }
 
 .popup-linha .texto-telefone {
   font-size: 11px;
   color: var(--texto-secundario);
-  text-decoration: none;
-}
-
-.popup-linha .texto-telefone:hover {
-  text-decoration: underline;
 }
 
 .popup-linha .texto-instagram {
   font-size: 11px;
   font-weight: 500;
-  text-decoration: none;
   color: var(--texto-secundario);
-}
-
-.popup-linha .texto-instagram:hover {
-  text-decoration: underline;
 }
 
 .popup-horario {
@@ -483,8 +495,8 @@ body {
 }
 
 .marcador-personalizado {
-  background: none !important;
-  border: none !important;
+  background: none;
+  border: none;
 }
 
 #busca-movel {
@@ -664,7 +676,7 @@ body {
   }
 
   .leaflet-control-zoom {
-    margin-right: 16px !important;
-    margin-top: 70px !important;
+    margin-right: 16px;
+    margin-top: 70px;
   }
 }

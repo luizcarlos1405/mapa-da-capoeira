@@ -1,4 +1,4 @@
-var ARQUIVO_DADOS = "dados.csv";
+var ARQUIVO_DADOS = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR2xX46FA_q9DwtlohUBk-q5a38E2piArGO7--eNuza1J-EvXOrZxDn8wDwj1Ciw8DRch-M2xc3OeIz/pub?gid=1007254703&single=true&output=csv";
 var CHAVE_CACHE = "mapacapoeira_geocode";
 var ATRASO_GEOCODE_MS = 1100;
 

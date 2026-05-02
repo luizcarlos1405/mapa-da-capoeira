@@ -4,6 +4,21 @@ const ATRASO_GEOCODE_MS = 1100;
 
 const CORES_GRUPO = ["#002776"];
 
+const COLUNAS = {
+  MOSTRAR: "Mostrar no Mapa",
+  NOME_ENDERECO: "Nome do Endereço",
+  ENDERECO: "Endereço",
+  PLUS_CODE: "Plus Code",
+  COORDENADAS: "Coordenadas",
+  RESPONSAVEL: "Nome do Responsável",
+  TELEFONE: "Telefone de Contato",
+  GRUPO: "Grupo",
+  HORARIOS: "Horários de Treino",
+  INSTAGRAM: "Instagram",
+  LATITUDE: "Latitude",
+  LONGITUDE: "Longitude",
+};
+
 const todosLocais = [];
 let mapaGlobal = null;
 let textoBusca = "";
@@ -101,10 +116,10 @@ function parsearCSV(texto) {
 
   const cabecalho = separarCampos(linhas[0]);
   const colunaLat = cabecalho.findIndex(function (c) {
-    return c.trim().toLowerCase() === "latitude";
+    return c.trim().toLowerCase() === COLUNAS.LATITUDE.toLowerCase();
   });
   const colunaLon = cabecalho.findIndex(function (c) {
-    return c.trim().toLowerCase() === "longitude";
+    return c.trim().toLowerCase() === COLUNAS.LONGITUDE.toLowerCase();
   });
 
   return linhas.slice(1).map(function (linha) {
@@ -211,31 +226,31 @@ function criarIcone() {
 
 function conteudoPopup(ponto) {
   let html =
-    '<div class="popup-cabecalho"><h3>' + ponto["Grupo"] + "</h3></div>";
+    '<div class="popup-cabecalho"><h3>' + ponto[COLUNAS.GRUPO] + "</h3></div>";
   html += '<div class="popup-corpo">';
 
   html +=
     '<div class="popup-linha">' +
     iconeUsuario(14) +
     '<span class="texto-nome">' +
-    ponto["Nome do Responsável"] +
+    ponto[COLUNAS.RESPONSAVEL] +
     "</span></div>";
 
   const partesEndereco = [];
-  if (ponto["Nome do Endereço"] && ponto["Nome do Endereço"].trim()) partesEndereco.push("<strong>" + ponto["Nome do Endereço"] + "</strong>");
-  if (ponto["Endereço"] && ponto["Endereço"].trim()) partesEndereco.push(ponto["Endereço"]);
+  if (ponto[COLUNAS.NOME_ENDERECO] && ponto[COLUNAS.NOME_ENDERECO].trim()) partesEndereco.push("<strong>" + ponto[COLUNAS.NOME_ENDERECO] + "</strong>");
+  if (ponto[COLUNAS.ENDERECO] && ponto[COLUNAS.ENDERECO].trim()) partesEndereco.push(ponto[COLUNAS.ENDERECO]);
   const textoEndereco = partesEndereco.join("<br>");
   html +=
     '<div class="popup-linha">' +
     iconeLocalizacao(14) +
     '<a class="texto-endereco" href="' +
-    linkGoogleMaps(ponto["Nome do Endereço"] || ponto["Endereço"]) +
+    linkGoogleMaps(ponto[COLUNAS.NOME_ENDERECO] || ponto[COLUNAS.ENDERECO]) +
     '" target="_blank" rel="noopener">' +
     textoEndereco +
     "</a></div>";
 
-  if (ponto["Telefone de Contato"]) {
-    const linkZap = linkWhatsApp(ponto["Telefone de Contato"]);
+  if (ponto[COLUNAS.TELEFONE]) {
+    const linkZap = linkWhatsApp(ponto[COLUNAS.TELEFONE]);
     html +=
       '<div class="popup-linha">' +
       iconeTelefone(14) +
@@ -243,28 +258,28 @@ function conteudoPopup(ponto) {
         ? '<a class="texto-telefone" href="' +
           linkZap +
           '" target="_blank" rel="noopener">' +
-          ponto["Telefone de Contato"] +
+          ponto[COLUNAS.TELEFONE] +
           "</a>"
         : '<span class="texto-telefone">' +
-          ponto["Telefone de Contato"] +
+          ponto[COLUNAS.TELEFONE] +
           "</span>") +
       "</div>";
   }
 
-  const handleIg = extrairHandleInstagram(ponto["Instagram"]);
+  const handleIg = extrairHandleInstagram(ponto[COLUNAS.INSTAGRAM]);
   if (handleIg) {
     html +=
       '<div class="popup-linha">' +
       iconeInstagram(14) +
       '<a class="texto-instagram" href="' +
-      ponto["Instagram"] +
+      ponto[COLUNAS.INSTAGRAM] +
       '" target="_blank" rel="noopener">' +
       handleIg +
       "</a></div>";
   }
 
-  if (ponto["Horários de Treino"]) {
-    const horarios = ponto["Horários de Treino"]
+  if (ponto[COLUNAS.HORARIOS]) {
+    const horarios = ponto[COLUNAS.HORARIOS]
       .split(";")
       .map(function (h) {
         return h.trim();
@@ -297,31 +312,31 @@ function criarCartao(ponto, marcador, cor) {
     '<span class="cartao-grupo" style="color:' +
     cor +
     '">' +
-    ponto["Grupo"] +
+    ponto[COLUNAS.GRUPO] +
     "</span></div>";
 
   html +=
     '<div class="cartao-detalhe">' +
     iconeUsuario(14) +
     '<span class="texto-responsavel">' +
-    ponto["Nome do Responsável"] +
+    ponto[COLUNAS.RESPONSAVEL] +
     "</span></div>";
 
   const partesEndereco = [];
-  if (ponto["Nome do Endereço"] && ponto["Nome do Endereço"].trim()) partesEndereco.push("<strong>" + ponto["Nome do Endereço"] + "</strong>");
-  if (ponto["Endereço"] && ponto["Endereço"].trim()) partesEndereco.push(ponto["Endereço"]);
+  if (ponto[COLUNAS.NOME_ENDERECO] && ponto[COLUNAS.NOME_ENDERECO].trim()) partesEndereco.push("<strong>" + ponto[COLUNAS.NOME_ENDERECO] + "</strong>");
+  if (ponto[COLUNAS.ENDERECO] && ponto[COLUNAS.ENDERECO].trim()) partesEndereco.push(ponto[COLUNAS.ENDERECO]);
   const textoEndereco = partesEndereco.join("<br>");
   html +=
     '<div class="cartao-detalhe">' +
     iconeLocalizacao(14) +
     '<a class="texto-endereco" href="' +
-    linkGoogleMaps(ponto["Nome do Endereço"] || ponto["Endereço"]) +
+    linkGoogleMaps(ponto[COLUNAS.NOME_ENDERECO] || ponto[COLUNAS.ENDERECO]) +
     '" target="_blank" rel="noopener">' +
     textoEndereco +
     "</a></div>";
 
-  if (ponto["Telefone de Contato"]) {
-    const linkZap = linkWhatsApp(ponto["Telefone de Contato"]);
+  if (ponto[COLUNAS.TELEFONE]) {
+    const linkZap = linkWhatsApp(ponto[COLUNAS.TELEFONE]);
     html +=
       '<div class="cartao-detalhe">' +
       iconeTelefone(14) +
@@ -329,28 +344,28 @@ function criarCartao(ponto, marcador, cor) {
         ? '<a class="texto-telefone" href="' +
           linkZap +
           '" target="_blank" rel="noopener">' +
-          ponto["Telefone de Contato"] +
+          ponto[COLUNAS.TELEFONE] +
           "</a>"
         : '<span class="texto-telefone">' +
-          ponto["Telefone de Contato"] +
+          ponto[COLUNAS.TELEFONE] +
           "</span>") +
       "</div>";
   }
 
-  const handleIg = extrairHandleInstagram(ponto["Instagram"]);
+  const handleIg = extrairHandleInstagram(ponto[COLUNAS.INSTAGRAM]);
   if (handleIg) {
     html +=
       '<div class="cartao-detalhe">' +
       iconeInstagram(14) +
       '<a class="texto-instagram" href="' +
-      ponto["Instagram"] +
+      ponto[COLUNAS.INSTAGRAM] +
       '" target="_blank" rel="noopener">' +
       handleIg +
       "</a></div>";
   }
 
-  if (ponto["Horários de Treino"]) {
-    const horarios = ponto["Horários de Treino"]
+  if (ponto[COLUNAS.HORARIOS]) {
+    const horarios = ponto[COLUNAS.HORARIOS]
       .split(";")
       .map(function (h) {
         return h.trim();
@@ -390,7 +405,7 @@ function criarAvisoNaoEncontrado(ponto) {
     '<div class="cartao-cabecalho">' +
     '<div class="cartao-ponto" style="background:#c62828"></div>' +
     '<span class="cartao-grupo" style="color:#c62828">' +
-    ponto["Grupo"] +
+    ponto[COLUNAS.GRUPO] +
     "</span></div>" +
     '<div class="cartao-detalhe">' +
     '<span class="texto-endereco" style="color:#c62828">Endereço não localizado</span></div>' +
@@ -399,8 +414,8 @@ function criarAvisoNaoEncontrado(ponto) {
     '<span class="texto-endereco">' +
     (function () {
       const p = [];
-      if (ponto["Nome do Endereço"] && ponto["Nome do Endereço"].trim()) p.push("<strong>" + ponto["Nome do Endereço"] + "</strong>");
-      if (ponto["Endereço"] && ponto["Endereço"].trim()) p.push(ponto["Endereço"]);
+      if (ponto[COLUNAS.NOME_ENDERECO] && ponto[COLUNAS.NOME_ENDERECO].trim()) p.push("<strong>" + ponto[COLUNAS.NOME_ENDERECO] + "</strong>");
+      if (ponto[COLUNAS.ENDERECO] && ponto[COLUNAS.ENDERECO].trim()) p.push(ponto[COLUNAS.ENDERECO]);
       return p.join("<br>");
     })() +
     "</span></div>";
@@ -414,23 +429,23 @@ function combinarFiltro(ponto) {
   switch (campoFiltro) {
     case "nome":
       return (
-        (ponto["Nome do Endereço"] || "").toLowerCase().indexOf(texto) >= 0 ||
-        (ponto["Endereço"] || "").toLowerCase().indexOf(texto) >= 0
+        (ponto[COLUNAS.NOME_ENDERECO] || "").toLowerCase().indexOf(texto) >= 0 ||
+        (ponto[COLUNAS.ENDERECO] || "").toLowerCase().indexOf(texto) >= 0
       );
     case "grupo":
-      return (ponto["Grupo"] || "").toLowerCase().indexOf(texto) >= 0;
+      return (ponto[COLUNAS.GRUPO] || "").toLowerCase().indexOf(texto) >= 0;
     case "responsavel":
       return (
-        (ponto["Nome do Responsável"] || "").toLowerCase().indexOf(texto) >= 0
+        (ponto[COLUNAS.RESPONSAVEL] || "").toLowerCase().indexOf(texto) >= 0
       );
     default:
       return (
-        (ponto["Grupo"] || "").toLowerCase().indexOf(texto) >= 0 ||
-        (ponto["Nome do Responsável"] || "").toLowerCase().indexOf(texto) >=
+        (ponto[COLUNAS.GRUPO] || "").toLowerCase().indexOf(texto) >= 0 ||
+        (ponto[COLUNAS.RESPONSAVEL] || "").toLowerCase().indexOf(texto) >=
           0 ||
-        (ponto["Endereço"] || "").toLowerCase().indexOf(texto) >= 0 ||
-        (ponto["Telefone de Contato"] || "").toLowerCase().indexOf(texto) >= 0 ||
-        (ponto["Instagram"] || "").toLowerCase().indexOf(texto) >= 0
+        (ponto[COLUNAS.ENDERECO] || "").toLowerCase().indexOf(texto) >= 0 ||
+        (ponto[COLUNAS.TELEFONE] || "").toLowerCase().indexOf(texto) >= 0 ||
+        (ponto[COLUNAS.INSTAGRAM] || "").toLowerCase().indexOf(texto) >= 0
       );
   }
 }
@@ -488,8 +503,8 @@ function fecharPainel() {
 }
 
 function extrairCoordenadas(ponto) {
-  if (ponto["Coordenadas"] && ponto["Coordenadas"].trim()) {
-    const partes = ponto["Coordenadas"].split(",");
+  if (ponto[COLUNAS.COORDENADAS] && ponto[COLUNAS.COORDENADAS].trim()) {
+    const partes = ponto[COLUNAS.COORDENADAS].split(",");
     if (partes.length >= 2) {
       const lat = parseFloat(partes[0].trim());
       const lon = parseFloat(partes[1].trim());
@@ -532,7 +547,7 @@ async function inicializarMapa() {
     const texto = await resposta.text();
     const pontos = parsearCSV(texto).filter(function (p) {
       return (
-        p["Mostrar no Mapa"] && p["Mostrar no Mapa"].toUpperCase() === "TRUE"
+        p[COLUNAS.MOSTRAR] && p[COLUNAS.MOSTRAR].toUpperCase() === "TRUE"
       );
     });
 
@@ -553,7 +568,7 @@ async function inicializarMapa() {
 
     for (let j = 0; j < comCoords.length; j++) {
       const item = comCoords[j];
-      const cor = corDoGrupo(item.ponto["Grupo"]);
+      const cor = corDoGrupo(item.ponto[COLUNAS.GRUPO]);
       const icone = criarIcone();
       const marcador = criarMarcador(item.ponto, item.coords, mapaGlobal, icone);
       marcadores.push(marcador);
@@ -576,16 +591,16 @@ async function inicializarMapa() {
       const pontoSem = semCoords[k];
       let coordsSem = null;
 
-      if (pontoSem["Plus Code"] && pontoSem["Plus Code"].trim()) {
-        coordsSem = await geocodificar(pontoSem["Plus Code"].trim());
+      if (pontoSem[COLUNAS.PLUS_CODE] && pontoSem[COLUNAS.PLUS_CODE].trim()) {
+        coordsSem = await geocodificar(pontoSem[COLUNAS.PLUS_CODE].trim());
       }
 
       if (!coordsSem) {
-        coordsSem = await geocodificar(pontoSem["Endereço"]);
+        coordsSem = await geocodificar(pontoSem[COLUNAS.ENDERECO]);
       }
 
       if (coordsSem) {
-        const corSem = corDoGrupo(pontoSem["Grupo"]);
+        const corSem = corDoGrupo(pontoSem[COLUNAS.GRUPO]);
         const iconeSem = criarIcone();
         const marcadorSem = criarMarcador(
           pontoSem,
@@ -604,7 +619,7 @@ async function inicializarMapa() {
           mapaGlobal.fitBounds(L.featureGroup(marcadores).getBounds().pad(0.2));
         }
       } else {
-        console.warn('Endereço não encontrado: "' + pontoSem["Endereço"] + '"');
+        console.warn('Endereço não encontrado: "' + pontoSem[COLUNAS.ENDERECO] + '"');
         todosLocais.push({
           ponto: pontoSem,
           marcador: null,

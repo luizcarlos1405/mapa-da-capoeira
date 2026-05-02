@@ -1,4 +1,5 @@
-const ARQUIVO_DADOS = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR2xX46FA_q9DwtlohUBk-q5a38E2piArGO7--eNuza1J-EvXOrZxDn8wDwj1Ciw8DRch-M2xc3OeIz/pub?gid=1007254703&single=true&output=csv";
+const ARQUIVO_DADOS =
+  "https://docs.google.com/spreadsheets/d/e/2PACX-1vR2xX46FA_q9DwtlohUBk-q5a38E2piArGO7--eNuza1J-EvXOrZxDn8wDwj1Ciw8DRch-M2xc3OeIz/pub?gid=1007254703&single=true&output=csv";
 const CHAVE_CACHE = "mapacapoeira_geocode";
 const ATRASO_GEOCODE_MS = 1100;
 
@@ -129,8 +130,8 @@ function parsearCSV(texto) {
       registro[col.trim()] = (campos[i] || "").trim();
     });
     if (colunaLat >= 0 && colunaLon >= 0) {
-      registro["_lat"] = parseFloat(campos[colunaLat]);
-      registro["_lon"] = parseFloat(campos[colunaLon]);
+      registro._lat = parseFloat(campos[colunaLat]);
+      registro._lon = parseFloat(campos[colunaLon]);
     }
     return registro;
   });
@@ -237,8 +238,12 @@ function conteudoPopup(ponto) {
     "</span></div>";
 
   const partesEndereco = [];
-  if (ponto[COLUNAS.NOME_ENDERECO] && ponto[COLUNAS.NOME_ENDERECO].trim()) partesEndereco.push("<strong>" + ponto[COLUNAS.NOME_ENDERECO] + "</strong>");
-  if (ponto[COLUNAS.ENDERECO] && ponto[COLUNAS.ENDERECO].trim()) partesEndereco.push(ponto[COLUNAS.ENDERECO]);
+  if (ponto[COLUNAS.NOME_ENDERECO] && ponto[COLUNAS.NOME_ENDERECO].trim())
+    partesEndereco.push(
+      "<strong>" + ponto[COLUNAS.NOME_ENDERECO] + "</strong>",
+    );
+  if (ponto[COLUNAS.ENDERECO] && ponto[COLUNAS.ENDERECO].trim())
+    partesEndereco.push(ponto[COLUNAS.ENDERECO]);
   const textoEndereco = partesEndereco.join("<br>");
   html +=
     '<div class="popup-linha">' +
@@ -323,8 +328,12 @@ function criarCartao(ponto, marcador, cor) {
     "</span></div>";
 
   const partesEndereco = [];
-  if (ponto[COLUNAS.NOME_ENDERECO] && ponto[COLUNAS.NOME_ENDERECO].trim()) partesEndereco.push("<strong>" + ponto[COLUNAS.NOME_ENDERECO] + "</strong>");
-  if (ponto[COLUNAS.ENDERECO] && ponto[COLUNAS.ENDERECO].trim()) partesEndereco.push(ponto[COLUNAS.ENDERECO]);
+  if (ponto[COLUNAS.NOME_ENDERECO] && ponto[COLUNAS.NOME_ENDERECO].trim())
+    partesEndereco.push(
+      "<strong>" + ponto[COLUNAS.NOME_ENDERECO] + "</strong>",
+    );
+  if (ponto[COLUNAS.ENDERECO] && ponto[COLUNAS.ENDERECO].trim())
+    partesEndereco.push(ponto[COLUNAS.ENDERECO]);
   const textoEndereco = partesEndereco.join("<br>");
   html +=
     '<div class="cartao-detalhe">' +
@@ -414,8 +423,10 @@ function criarAvisoNaoEncontrado(ponto) {
     '<span class="texto-endereco">' +
     (function () {
       const p = [];
-      if (ponto[COLUNAS.NOME_ENDERECO] && ponto[COLUNAS.NOME_ENDERECO].trim()) p.push("<strong>" + ponto[COLUNAS.NOME_ENDERECO] + "</strong>");
-      if (ponto[COLUNAS.ENDERECO] && ponto[COLUNAS.ENDERECO].trim()) p.push(ponto[COLUNAS.ENDERECO]);
+      if (ponto[COLUNAS.NOME_ENDERECO] && ponto[COLUNAS.NOME_ENDERECO].trim())
+        p.push("<strong>" + ponto[COLUNAS.NOME_ENDERECO] + "</strong>");
+      if (ponto[COLUNAS.ENDERECO] && ponto[COLUNAS.ENDERECO].trim())
+        p.push(ponto[COLUNAS.ENDERECO]);
       return p.join("<br>");
     })() +
     "</span></div>";
@@ -429,8 +440,8 @@ function combinarFiltro(ponto) {
   switch (campoFiltro) {
     case "nome":
       return (
-        (ponto[COLUNAS.NOME_ENDERECO] || "").toLowerCase().indexOf(texto) >= 0 ||
-        (ponto[COLUNAS.ENDERECO] || "").toLowerCase().indexOf(texto) >= 0
+        (ponto[COLUNAS.NOME_ENDERECO] || "").toLowerCase().indexOf(texto) >=
+          0 || (ponto[COLUNAS.ENDERECO] || "").toLowerCase().indexOf(texto) >= 0
       );
     case "grupo":
       return (ponto[COLUNAS.GRUPO] || "").toLowerCase().indexOf(texto) >= 0;
@@ -441,8 +452,7 @@ function combinarFiltro(ponto) {
     default:
       return (
         (ponto[COLUNAS.GRUPO] || "").toLowerCase().indexOf(texto) >= 0 ||
-        (ponto[COLUNAS.RESPONSAVEL] || "").toLowerCase().indexOf(texto) >=
-          0 ||
+        (ponto[COLUNAS.RESPONSAVEL] || "").toLowerCase().indexOf(texto) >= 0 ||
         (ponto[COLUNAS.ENDERECO] || "").toLowerCase().indexOf(texto) >= 0 ||
         (ponto[COLUNAS.TELEFONE] || "").toLowerCase().indexOf(texto) >= 0 ||
         (ponto[COLUNAS.INSTAGRAM] || "").toLowerCase().indexOf(texto) >= 0
@@ -514,8 +524,8 @@ function extrairCoordenadas(ponto) {
     }
   }
 
-  if (!isNaN(ponto["_lat"]) && !isNaN(ponto["_lon"])) {
-    return { lat: ponto["_lat"], lon: ponto["_lon"] };
+  if (!isNaN(ponto._lat) && !isNaN(ponto._lon)) {
+    return { lat: ponto._lat, lon: ponto._lon };
   }
 
   return null;
@@ -546,9 +556,7 @@ async function inicializarMapa() {
 
     const texto = await resposta.text();
     const pontos = parsearCSV(texto).filter(function (p) {
-      return (
-        p[COLUNAS.MOSTRAR] && p[COLUNAS.MOSTRAR].toUpperCase() === "TRUE"
-      );
+      return p[COLUNAS.MOSTRAR] && p[COLUNAS.MOSTRAR].toUpperCase() === "TRUE";
     });
 
     const comCoords = [];
@@ -570,7 +578,12 @@ async function inicializarMapa() {
       const item = comCoords[j];
       const cor = corDoGrupo(item.ponto[COLUNAS.GRUPO]);
       const icone = criarIcone();
-      const marcador = criarMarcador(item.ponto, item.coords, mapaGlobal, icone);
+      const marcador = criarMarcador(
+        item.ponto,
+        item.coords,
+        mapaGlobal,
+        icone,
+      );
       marcadores.push(marcador);
       todosLocais.push({
         ponto: item.ponto,
@@ -619,7 +632,9 @@ async function inicializarMapa() {
           mapaGlobal.fitBounds(L.featureGroup(marcadores).getBounds().pad(0.2));
         }
       } else {
-        console.warn('Endereço não encontrado: "' + pontoSem[COLUNAS.ENDERECO] + '"');
+        console.warn(
+          'Endereço não encontrado: "' + pontoSem[COLUNAS.ENDERECO] + '"',
+        );
         todosLocais.push({
           ponto: pontoSem,
           marcador: null,

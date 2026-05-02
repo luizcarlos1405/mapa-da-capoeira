@@ -6,17 +6,18 @@ const ATRASO_GEOCODE_MS = 1100;
 const CORES_GRUPO = ["#002776"];
 
 const ICONE = {
-  USUARIO:
-    '<path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
-  LOCALIZACAO:
-    '<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>',
-  TELEFONE:
-    '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>',
-  CALENDARIO:
-    '<rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/>',
-  INSTAGRAM:
-    '<rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>',
-  WHATSAPP: '<path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/>',
+  usuario: (tam) =>
+    `<svg xmlns="http://www.w3.org/2000/svg" width="${tam}" height="${tam}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`,
+  localizacao: (tam) =>
+    `<svg xmlns="http://www.w3.org/2000/svg" width="${tam}" height="${tam}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>`,
+  telefone: (tam) =>
+    `<svg xmlns="http://www.w3.org/2000/svg" width="${tam}" height="${tam}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>`,
+  calendario: (tam) =>
+    `<svg xmlns="http://www.w3.org/2000/svg" width="${tam}" height="${tam}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>`,
+  instagram: (tam) =>
+    `<svg xmlns="http://www.w3.org/2000/svg" width="${tam}" height="${tam}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>`,
+  whatsapp: (tam) =>
+    `<svg xmlns="http://www.w3.org/2000/svg" width="${tam}" height="${tam}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>`,
 };
 
 const COLUNAS = {
@@ -39,42 +40,6 @@ let mapaGlobal = null;
 let textoBusca = "";
 let campoFiltro = "todos";
 
-function iconeSVG(dados, tam) {
-  return (
-    '<svg xmlns="http://www.w3.org/2000/svg" width="' +
-    tam +
-    '" height="' +
-    tam +
-    '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
-    dados +
-    "</svg>"
-  );
-}
-
-function iconeUsuario(tam) {
-  return iconeSVG(ICONE.USUARIO, tam);
-}
-
-function iconeLocalizacao(tam) {
-  return iconeSVG(ICONE.LOCALIZACAO, tam);
-}
-
-function iconeTelefone(tam) {
-  return iconeSVG(ICONE.TELEFONE, tam);
-}
-
-function iconeCalendario(tam) {
-  return iconeSVG(ICONE.CALENDARIO, tam);
-}
-
-function iconeInstagram(tam) {
-  return iconeSVG(ICONE.INSTAGRAM, tam);
-}
-
-function iconeWhatsApp(tam) {
-  return iconeSVG(ICONE.WHATSAPP, tam);
-}
-
 function botoesAcao(ponto, contexto) {
   const botoes = [];
   const tel = ponto[COLUNAS.TELEFONE];
@@ -83,7 +48,7 @@ function botoesAcao(ponto, contexto) {
     let telNumeros = tel.replace(/\D/g, "");
     if (!telNumeros.startsWith("55")) telNumeros = "55" + telNumeros;
     botoes.push({
-      icone: iconeTelefone(14),
+      icone: ICONE.telefone(14),
       rotulo: "Ligar",
       link: "tel:+" + telNumeros,
     });
@@ -92,7 +57,7 @@ function botoesAcao(ponto, contexto) {
   const endereco = ponto[COLUNAS.NOME_ENDERECO] || ponto[COLUNAS.ENDERECO];
   if (endereco && endereco.trim()) {
     botoes.push({
-      icone: iconeLocalizacao(14),
+      icone: ICONE.localizacao(14),
       rotulo: "Como chegar",
       link: linkGoogleMaps(endereco),
     });
@@ -101,7 +66,7 @@ function botoesAcao(ponto, contexto) {
   const handleIg = extrairHandleInstagram(ponto[COLUNAS.INSTAGRAM]);
   if (handleIg) {
     botoes.push({
-      icone: iconeInstagram(14),
+      icone: ICONE.instagram(14),
       rotulo: "Instagram",
       link: ponto[COLUNAS.INSTAGRAM],
     });
@@ -110,7 +75,7 @@ function botoesAcao(ponto, contexto) {
   const linkZap = linkWhatsApp(tel);
   if (linkZap) {
     botoes.push({
-      icone: iconeWhatsApp(14),
+      icone: ICONE.whatsapp(14),
       rotulo: "Whatsapp",
       link: linkZap,
     });
@@ -299,7 +264,7 @@ function conteudoPopup(ponto) {
 
   html +=
     '<div class="popup-linha">' +
-    iconeUsuario(14) +
+    ICONE.usuario(14) +
     '<span class="texto-nome">' +
     ponto[COLUNAS.RESPONSAVEL] +
     "</span></div>";
@@ -314,7 +279,7 @@ function conteudoPopup(ponto) {
   const textoEndereco = partesEndereco.join("<br>");
   html +=
     '<div class="popup-linha">' +
-    iconeLocalizacao(14) +
+    ICONE.localizacao(14) +
     '<span class="texto-endereco">' +
     textoEndereco +
     "</span></div>";
@@ -322,7 +287,7 @@ function conteudoPopup(ponto) {
   if (ponto[COLUNAS.TELEFONE]) {
     html +=
       '<div class="popup-linha">' +
-      iconeTelefone(14) +
+      ICONE.telefone(14) +
       '<span class="texto-telefone">' +
       ponto[COLUNAS.TELEFONE] +
       "</span></div>";
@@ -332,7 +297,7 @@ function conteudoPopup(ponto) {
   if (handleIg) {
     html +=
       '<div class="popup-linha">' +
-      iconeInstagram(14) +
+      ICONE.instagram(14) +
       '<span class="texto-instagram">' +
       handleIg +
       "</span></div>";
@@ -351,7 +316,7 @@ function conteudoPopup(ponto) {
     if (horarios) {
       html +=
         '<div class="popup-horario">' +
-        iconeCalendario(13) +
+        ICONE.calendario(13) +
         "<span>" +
         horarios +
         "</span></div>";
@@ -384,7 +349,7 @@ function criarCartao(ponto, marcador, cor) {
 
   html +=
     '<div class="cartao-detalhe">' +
-    iconeUsuario(14) +
+    ICONE.usuario(14) +
     '<span class="texto-responsavel">' +
     ponto[COLUNAS.RESPONSAVEL] +
     "</span></div>";
@@ -399,7 +364,7 @@ function criarCartao(ponto, marcador, cor) {
   const textoEndereco = partesEndereco.join("<br>");
   html +=
     '<div class="cartao-detalhe">' +
-    iconeLocalizacao(14) +
+    ICONE.localizacao(14) +
     '<span class="texto-endereco">' +
     textoEndereco +
     "</span></div>";
@@ -407,7 +372,7 @@ function criarCartao(ponto, marcador, cor) {
   if (ponto[COLUNAS.TELEFONE]) {
     html +=
       '<div class="cartao-detalhe">' +
-      iconeTelefone(14) +
+      ICONE.telefone(14) +
       '<span class="texto-telefone">' +
       ponto[COLUNAS.TELEFONE] +
       "</span></div>";
@@ -417,7 +382,7 @@ function criarCartao(ponto, marcador, cor) {
   if (handleIg) {
     html +=
       '<div class="cartao-detalhe">' +
-      iconeInstagram(14) +
+      ICONE.instagram(14) +
       '<span class="texto-instagram">' +
       handleIg +
       "</span></div>";
@@ -436,7 +401,7 @@ function criarCartao(ponto, marcador, cor) {
     if (horarios) {
       html +=
         '<div class="cartao-horario">' +
-        iconeCalendario(13) +
+        ICONE.calendario(13) +
         "<span>" +
         horarios +
         "</span></div>";
@@ -471,7 +436,7 @@ function criarAvisoNaoEncontrado(ponto) {
     '<div class="cartao-detalhe">' +
     '<span class="texto-endereco" style="color:#c62828">Endereço não localizado</span></div>' +
     '<div class="cartao-detalhe">' +
-    iconeLocalizacao(14) +
+    ICONE.localizacao(14) +
     '<span class="texto-endereco">' +
     (function () {
       const p = [];

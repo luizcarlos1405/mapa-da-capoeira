@@ -219,6 +219,190 @@
                   "fontWeight": "normal"
                 }
               ]
+            },
+            {
+              "type": "rectangle",
+              "id": "sBp1r",
+              "name": "separator",
+              "fill": "#E0DDD5",
+              "width": "fill_container",
+              "height": 1
+            },
+            {
+              "type": "frame",
+              "id": "tCq2s",
+              "name": "action-buttons",
+              "width": 288,
+              "height": 62,
+              "layout": "vertical",
+              "gap": 6,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "NH7IE",
+                  "name": "action-row-1",
+                  "width": "fill_container",
+                  "gap": 8,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "xGu6w",
+                      "name": "btn-phone",
+                      "fill": "#F0F7F1",
+                      "cornerRadius": 8,
+                      "gap": 4,
+                      "padding": [
+                        7,
+                        12
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "yHv7x",
+                          "name": "btn-icon-phone",
+                          "width": 14,
+                          "height": 14,
+                          "iconFontName": "phone",
+                          "iconFontFamily": "lucide",
+                          "fill": "#009739"
+                        },
+                        {
+                          "type": "text",
+                          "id": "zIw8y",
+                          "name": "btn-label-phone",
+                          "fill": "#009739",
+                          "content": "Ligar",
+                          "fontFamily": "Inter",
+                          "fontSize": 11,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "uDr3t",
+                      "name": "btn-map",
+                      "fill": "#F0F7F1",
+                      "cornerRadius": 8,
+                      "gap": 4,
+                      "padding": [
+                        7,
+                        12
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "vEs4u",
+                          "name": "btn-icon-map",
+                          "width": 14,
+                          "height": 14,
+                          "iconFontName": "map-pin",
+                          "iconFontFamily": "lucide",
+                          "fill": "#009739"
+                        },
+                        {
+                          "type": "text",
+                          "id": "wFt5v",
+                          "name": "btn-label-map",
+                          "fill": "#009739",
+                          "content": "Como chegar",
+                          "fontFamily": "Inter",
+                          "fontSize": 11,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "aJx9z",
+                      "name": "btn-instagram",
+                      "fill": "#F0F7F1",
+                      "cornerRadius": 8,
+                      "gap": 4,
+                      "padding": [
+                        7,
+                        12
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "bKy0a",
+                          "name": "btn-icon-instagram",
+                          "width": 14,
+                          "height": 14,
+                          "iconFontName": "instagram",
+                          "iconFontFamily": "lucide",
+                          "fill": "#009739"
+                        },
+                        {
+                          "type": "text",
+                          "id": "cLz1b",
+                          "name": "btn-label-instagram",
+                          "fill": "#009739",
+                          "content": "Instagram",
+                          "fontFamily": "Inter",
+                          "fontSize": 11,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "O1ijN9",
+                  "name": "action-row-2",
+                  "width": "fill_container",
+                  "gap": 8,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "p2CnHi",
+                      "name": "btn-whatsapp",
+                      "fill": "#F0F7F1",
+                      "cornerRadius": 8,
+                      "gap": 4,
+                      "padding": [
+                        7,
+                        12
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "B2UDz0",
+                          "name": "waIcon",
+                          "width": 14,
+                          "height": 14,
+                          "iconFontName": "message-circle",
+                          "iconFontFamily": "lucide",
+                          "fill": "#009739"
+                        },
+                        {
+                          "type": "text",
+                          "id": "DpqGu",
+                          "name": "waTxt",
+                          "fill": "#009739",
+                          "content": "Whatsapp",
+                          "fontFamily": "Inter",
+                          "fontSize": 11,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -241,7 +425,7 @@
       "x": 420,
       "y": 0,
       "name": "Map Popup with Instagram",
-      "width": 280,
+      "width": 320,
       "layout": "vertical",
       "children": [
         {
@@ -283,7 +467,8 @@
               "fill": "#FFFFFF",
               "content": "Associação de Capoeira Baiana",
               "fontFamily": "Anton",
-              "fontSize": 16
+              "fontSize": 16,
+              "fontWeight": "normal"
             }
           ]
         },
@@ -292,6 +477,7 @@
           "id": "9JOJ4",
           "name": "popup-body",
           "width": "fill_container",
+          "fill": "#faf9f5",
           "layout": "vertical",
           "gap": 8,
           "padding": [
@@ -445,6 +631,189 @@
                   "fontFamily": "Inter",
                   "fontSize": 11,
                   "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "rectangle",
+              "id": "dMa2c",
+              "name": "popup-separator",
+              "fill": "#E0DDD5",
+              "width": "fill_container",
+              "height": 1
+            },
+            {
+              "type": "frame",
+              "id": "eNb3d",
+              "name": "popup-action-buttons",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 6,
+              "justifyContent": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "Bzhnf",
+                  "name": "popup-action-row-1",
+                  "width": "fill_container",
+                  "gap": 6,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "iRf7h",
+                      "name": "pbtn-phone",
+                      "fill": "#F0F7F1",
+                      "cornerRadius": 8,
+                      "gap": 4,
+                      "padding": [
+                        7,
+                        10
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "jSg8i",
+                          "name": "pbtn-icon-phone",
+                          "width": 14,
+                          "height": 14,
+                          "iconFontName": "phone",
+                          "iconFontFamily": "lucide",
+                          "fill": "#009739"
+                        },
+                        {
+                          "type": "text",
+                          "id": "kTh9j",
+                          "name": "pbtn-label-phone",
+                          "fill": "#009739",
+                          "content": "Ligar",
+                          "fontFamily": "Inter",
+                          "fontSize": 11,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "fOc4e",
+                      "name": "pbtn-map",
+                      "fill": "#F0F7F1",
+                      "cornerRadius": 8,
+                      "gap": 4,
+                      "padding": [
+                        7,
+                        10
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "gPd5f",
+                          "name": "pbtn-icon-map",
+                          "width": 14,
+                          "height": 14,
+                          "iconFontName": "map-pin",
+                          "iconFontFamily": "lucide",
+                          "fill": "#009739"
+                        },
+                        {
+                          "type": "text",
+                          "id": "hQe6g",
+                          "name": "pbtn-label-map",
+                          "fill": "#009739",
+                          "content": "Como chegar",
+                          "fontFamily": "Inter",
+                          "fontSize": 11,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "lUi0k",
+                      "name": "pbtn-instagram",
+                      "fill": "#F0F7F1",
+                      "cornerRadius": 8,
+                      "gap": 4,
+                      "padding": [
+                        7,
+                        10
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "mVj1l",
+                          "name": "pbtn-icon-instagram",
+                          "width": 14,
+                          "height": 14,
+                          "iconFontName": "instagram",
+                          "iconFontFamily": "lucide",
+                          "fill": "#009739"
+                        },
+                        {
+                          "type": "text",
+                          "id": "nWk2m",
+                          "name": "pbtn-label-instagram",
+                          "fill": "#009739",
+                          "content": "Instagram",
+                          "fontFamily": "Inter",
+                          "fontSize": 11,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "eK3QB",
+                  "name": "popup-action-row-2",
+                  "width": "fill_container",
+                  "gap": 6,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "QZPzd",
+                      "name": "pbtn-whatsapp",
+                      "fill": "#F0F7F1",
+                      "cornerRadius": 8,
+                      "gap": 4,
+                      "padding": [
+                        7,
+                        10
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "z2Kqa",
+                          "name": "pwaIcon",
+                          "width": 14,
+                          "height": 14,
+                          "iconFontName": "message-circle",
+                          "iconFontFamily": "lucide",
+                          "fill": "#009739"
+                        },
+                        {
+                          "type": "text",
+                          "id": "P84c0J",
+                          "name": "pwaTxt",
+                          "fill": "#009739",
+                          "content": "Whatsapp",
+                          "fontFamily": "Inter",
+                          "fontSize": 11,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             }

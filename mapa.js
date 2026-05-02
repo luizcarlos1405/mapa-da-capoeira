@@ -1,13 +1,13 @@
-var ARQUIVO_DADOS = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR2xX46FA_q9DwtlohUBk-q5a38E2piArGO7--eNuza1J-EvXOrZxDn8wDwj1Ciw8DRch-M2xc3OeIz/pub?gid=1007254703&single=true&output=csv";
-var CHAVE_CACHE = "mapacapoeira_geocode";
-var ATRASO_GEOCODE_MS = 1100;
+const ARQUIVO_DADOS = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR2xX46FA_q9DwtlohUBk-q5a38E2piArGO7--eNuza1J-EvXOrZxDn8wDwj1Ciw8DRch-M2xc3OeIz/pub?gid=1007254703&single=true&output=csv";
+const CHAVE_CACHE = "mapacapoeira_geocode";
+const ATRASO_GEOCODE_MS = 1100;
 
-var CORES_GRUPO = ["#002776"];
+const CORES_GRUPO = ["#002776"];
 
-var todosLocais = [];
-var mapaGlobal = null;
-var textoBusca = "";
-var campoFiltro = "todos";
+const todosLocais = [];
+let mapaGlobal = null;
+let textoBusca = "";
+let campoFiltro = "todos";
 
 function iconeSVG(dados, tam) {
   return (
@@ -58,14 +58,14 @@ function iconeInstagram(tam) {
 
 function extrairHandleInstagram(url) {
   if (!url || !url.trim()) return null;
-  var match = url.match(/instagram\.com\/([^/?\s]+)/);
+  const match = url.match(/instagram\.com\/([^/?\s]+)/);
   if (match && match[1]) return "@" + match[1];
   return null;
 }
 
 function linkWhatsApp(telefone) {
   if (!telefone) return null;
-  var numeros = telefone.replace(/\D/g, "");
+  let numeros = telefone.replace(/\D/g, "");
   if (numeros.length < 10) return null;
   if (!numeros.startsWith("55")) numeros = "55" + numeros;
   return "https://wa.me/" + numeros;
@@ -91,7 +91,7 @@ function embaralhar(array) {
 }
 
 function parsearCSV(texto) {
-  var linhas = texto
+  const linhas = texto
     .replace(/\r\n/g, "\n")
     .replace(/\r/g, "\n")
     .split("\n")
@@ -99,17 +99,17 @@ function parsearCSV(texto) {
       return linha.trim();
     });
 
-  var cabecalho = separarCampos(linhas[0]);
-  var colunaLat = cabecalho.findIndex(function (c) {
+  const cabecalho = separarCampos(linhas[0]);
+  const colunaLat = cabecalho.findIndex(function (c) {
     return c.trim().toLowerCase() === "latitude";
   });
-  var colunaLon = cabecalho.findIndex(function (c) {
+  const colunaLon = cabecalho.findIndex(function (c) {
     return c.trim().toLowerCase() === "longitude";
   });
 
   return linhas.slice(1).map(function (linha) {
-    var campos = separarCampos(linha);
-    var registro = {};
+    const campos = separarCampos(linha);
+    const registro = {};
     cabecalho.forEach(function (col, i) {
       registro[col.trim()] = (campos[i] || "").trim();
     });
@@ -122,12 +122,12 @@ function parsearCSV(texto) {
 }
 
 function separarCampos(linha) {
-  var campos = [];
-  var atual = "";
-  var dentroAspas = false;
+  const campos = [];
+  let atual = "";
+  let dentroAspas = false;
 
-  for (var i = 0; i < linha.length; i++) {
-    var c = linha[i];
+  for (let i = 0; i < linha.length; i++) {
+    const c = linha[i];
     if (c === '"') {
       if (dentroAspas && linha[i + 1] === '"') {
         atual += '"';
@@ -159,19 +159,19 @@ function salvarCache(cache) {
 }
 
 async function geocodificar(endereco) {
-  var cache = obterCache();
+  const cache = obterCache();
   if (cache[endereco]) return cache[endereco];
 
-  var url =
+  const url =
     "https://nominatim.openstreetmap.org/search?q=" +
     encodeURIComponent(endereco) +
     "&format=json&countrycodes=br&limit=1";
 
-  var resposta = await fetch(url);
-  var dados = await resposta.json();
+  const resposta = await fetch(url);
+  const dados = await resposta.json();
 
   if (dados.length > 0) {
-    var resultado = {
+    const resultado = {
       lat: parseFloat(dados[0].lat),
       lon: parseFloat(dados[0].lon),
     };
@@ -184,7 +184,7 @@ async function geocodificar(endereco) {
 }
 
 function criarMapa() {
-  var mapa = L.map("mapa", { zoomControl: false }).setView(
+  const mapa = L.map("mapa", { zoomControl: false }).setView(
     [-14.235, -51.925],
     5,
   );
@@ -210,7 +210,7 @@ function criarIcone() {
 }
 
 function conteudoPopup(ponto) {
-  var html =
+  let html =
     '<div class="popup-cabecalho"><h3>' + ponto["Grupo"] + "</h3></div>";
   html += '<div class="popup-corpo">';
 
@@ -221,10 +221,10 @@ function conteudoPopup(ponto) {
     ponto["Nome do Responsável"] +
     "</span></div>";
 
-  var partesEndereco = [];
+  const partesEndereco = [];
   if (ponto["Nome do Endereço"] && ponto["Nome do Endereço"].trim()) partesEndereco.push("<strong>" + ponto["Nome do Endereço"] + "</strong>");
   if (ponto["Endereço"] && ponto["Endereço"].trim()) partesEndereco.push(ponto["Endereço"]);
-  var textoEndereco = partesEndereco.join("<br>");
+  const textoEndereco = partesEndereco.join("<br>");
   html +=
     '<div class="popup-linha">' +
     iconeLocalizacao(14) +
@@ -235,7 +235,7 @@ function conteudoPopup(ponto) {
     "</a></div>";
 
   if (ponto["Telefone de Contato"]) {
-    var linkZap = linkWhatsApp(ponto["Telefone de Contato"]);
+    const linkZap = linkWhatsApp(ponto["Telefone de Contato"]);
     html +=
       '<div class="popup-linha">' +
       iconeTelefone(14) +
@@ -251,7 +251,7 @@ function conteudoPopup(ponto) {
       "</div>";
   }
 
-  var handleIg = extrairHandleInstagram(ponto["Instagram"]);
+  const handleIg = extrairHandleInstagram(ponto["Instagram"]);
   if (handleIg) {
     html +=
       '<div class="popup-linha">' +
@@ -264,7 +264,7 @@ function conteudoPopup(ponto) {
   }
 
   if (ponto["Horários de Treino"]) {
-    var horarios = ponto["Horários de Treino"]
+    const horarios = ponto["Horários de Treino"]
       .split(";")
       .map(function (h) {
         return h.trim();
@@ -286,10 +286,10 @@ function conteudoPopup(ponto) {
 }
 
 function criarCartao(ponto, marcador, cor) {
-  var cartao = document.createElement("div");
+  const cartao = document.createElement("div");
   cartao.className = "cartao";
 
-  var html =
+  let html =
     '<div class="cartao-cabecalho">' +
     '<div class="cartao-ponto" style="background:' +
     cor +
@@ -307,10 +307,10 @@ function criarCartao(ponto, marcador, cor) {
     ponto["Nome do Responsável"] +
     "</span></div>";
 
-  var partesEndereco = [];
+  const partesEndereco = [];
   if (ponto["Nome do Endereço"] && ponto["Nome do Endereço"].trim()) partesEndereco.push("<strong>" + ponto["Nome do Endereço"] + "</strong>");
   if (ponto["Endereço"] && ponto["Endereço"].trim()) partesEndereco.push(ponto["Endereço"]);
-  var textoEndereco = partesEndereco.join("<br>");
+  const textoEndereco = partesEndereco.join("<br>");
   html +=
     '<div class="cartao-detalhe">' +
     iconeLocalizacao(14) +
@@ -321,7 +321,7 @@ function criarCartao(ponto, marcador, cor) {
     "</a></div>";
 
   if (ponto["Telefone de Contato"]) {
-    var linkZap = linkWhatsApp(ponto["Telefone de Contato"]);
+    const linkZap = linkWhatsApp(ponto["Telefone de Contato"]);
     html +=
       '<div class="cartao-detalhe">' +
       iconeTelefone(14) +
@@ -337,7 +337,7 @@ function criarCartao(ponto, marcador, cor) {
       "</div>";
   }
 
-  var handleIg = extrairHandleInstagram(ponto["Instagram"]);
+  const handleIg = extrairHandleInstagram(ponto["Instagram"]);
   if (handleIg) {
     html +=
       '<div class="cartao-detalhe">' +
@@ -350,7 +350,7 @@ function criarCartao(ponto, marcador, cor) {
   }
 
   if (ponto["Horários de Treino"]) {
-    var horarios = ponto["Horários de Treino"]
+    const horarios = ponto["Horários de Treino"]
       .split(";")
       .map(function (h) {
         return h.trim();
@@ -372,7 +372,7 @@ function criarCartao(ponto, marcador, cor) {
   cartao.innerHTML = html;
 
   cartao.onclick = function () {
-    var latlng = marcador.getLatLng();
+    const latlng = marcador.getLatLng();
     mapaGlobal.setView(latlng, 16);
     marcador.openPopup();
     if (window.innerWidth <= 768) {
@@ -384,7 +384,7 @@ function criarCartao(ponto, marcador, cor) {
 }
 
 function criarAvisoNaoEncontrado(ponto) {
-  var cartao = document.createElement("div");
+  const cartao = document.createElement("div");
   cartao.className = "cartao";
   cartao.innerHTML =
     '<div class="cartao-cabecalho">' +
@@ -398,7 +398,7 @@ function criarAvisoNaoEncontrado(ponto) {
     iconeLocalizacao(14) +
     '<span class="texto-endereco">' +
     (function () {
-      var p = [];
+      const p = [];
       if (ponto["Nome do Endereço"] && ponto["Nome do Endereço"].trim()) p.push("<strong>" + ponto["Nome do Endereço"] + "</strong>");
       if (ponto["Endereço"] && ponto["Endereço"].trim()) p.push(ponto["Endereço"]);
       return p.join("<br>");
@@ -409,7 +409,7 @@ function criarAvisoNaoEncontrado(ponto) {
 
 function combinarFiltro(ponto) {
   if (!textoBusca) return true;
-  var texto = textoBusca.toLowerCase();
+  const texto = textoBusca.toLowerCase();
 
   switch (campoFiltro) {
     case "nome":
@@ -436,15 +436,15 @@ function combinarFiltro(ponto) {
 }
 
 function renderizarLista() {
-  var lista = document.getElementById("lista-locais");
-  var contagem = document.getElementById("contagem-resultados");
-  var contagemMovel = document.getElementById("contagem-movel");
+  const lista = document.getElementById("lista-locais");
+  const contagem = document.getElementById("contagem-resultados");
+  const contagemMovel = document.getElementById("contagem-movel");
 
   lista.innerHTML = "";
   lista.appendChild(contagem);
 
   embaralhar(todosLocais);
-  var filtrados = todosLocais.filter(function (item) {
+  const filtrados = todosLocais.filter(function (item) {
     return combinarFiltro(item.ponto);
   });
 
@@ -458,7 +458,7 @@ function renderizarLista() {
 
 function filtrarLocais() {
   textoBusca = document.getElementById("entrada-busca").value;
-  var entradaMovel = document.getElementById("entrada-busca-movel");
+  const entradaMovel = document.getElementById("entrada-busca-movel");
   if (entradaMovel) entradaMovel.value = textoBusca;
   renderizarLista();
 }
@@ -471,7 +471,7 @@ function filtrarLocaisMovel() {
 
 function definirFiltro(botao, campo) {
   campoFiltro = campo;
-  var abas = botao.parentElement.querySelectorAll(".aba");
+  const abas = botao.parentElement.querySelectorAll(".aba");
   abas.forEach(function (a) {
     a.classList.remove("ativa");
   });
@@ -489,10 +489,10 @@ function fecharPainel() {
 
 function extrairCoordenadas(ponto) {
   if (ponto["Coordenadas"] && ponto["Coordenadas"].trim()) {
-    var partes = ponto["Coordenadas"].split(",");
+    const partes = ponto["Coordenadas"].split(",");
     if (partes.length >= 2) {
-      var lat = parseFloat(partes[0].trim());
-      var lon = parseFloat(partes[1].trim());
+      const lat = parseFloat(partes[0].trim());
+      const lon = parseFloat(partes[1].trim());
       if (!isNaN(lat) && !isNaN(lon)) {
         return { lat: lat, lon: lon };
       }
@@ -520,28 +520,28 @@ function sleep(ms) {
 
 async function inicializarMapa() {
   mapaGlobal = criarMapa();
-  var lista = document.getElementById("lista-locais");
-  var carregando = document.getElementById("carregando");
+  const lista = document.getElementById("lista-locais");
+  const carregando = document.getElementById("carregando");
 
   try {
-    var resposta = await fetch(ARQUIVO_DADOS);
+    const resposta = await fetch(ARQUIVO_DADOS);
     if (!resposta.ok) {
       throw new Error("Arquivo não encontrado: " + ARQUIVO_DADOS);
     }
 
-    var texto = await resposta.text();
-    var pontos = parsearCSV(texto).filter(function (p) {
+    const texto = await resposta.text();
+    const pontos = parsearCSV(texto).filter(function (p) {
       return (
         p["Mostrar no Mapa"] && p["Mostrar no Mapa"].toUpperCase() === "TRUE"
       );
     });
 
-    var comCoords = [];
-    var semCoords = [];
+    const comCoords = [];
+    const semCoords = [];
 
-    for (var i = 0; i < pontos.length; i++) {
-      var ponto = pontos[i];
-      var coords = extrairCoordenadas(ponto);
+    for (let i = 0; i < pontos.length; i++) {
+      const ponto = pontos[i];
+      const coords = extrairCoordenadas(ponto);
       if (coords) {
         comCoords.push({ ponto: ponto, coords: coords });
       } else {
@@ -549,13 +549,13 @@ async function inicializarMapa() {
       }
     }
 
-    var marcadores = [];
+    const marcadores = [];
 
-    for (var j = 0; j < comCoords.length; j++) {
-      var item = comCoords[j];
-      var cor = corDoGrupo(item.ponto["Grupo"]);
-      var icone = criarIcone();
-      var marcador = criarMarcador(item.ponto, item.coords, mapaGlobal, icone);
+    for (let j = 0; j < comCoords.length; j++) {
+      const item = comCoords[j];
+      const cor = corDoGrupo(item.ponto["Grupo"]);
+      const icone = criarIcone();
+      const marcador = criarMarcador(item.ponto, item.coords, mapaGlobal, icone);
       marcadores.push(marcador);
       todosLocais.push({
         ponto: item.ponto,
@@ -572,9 +572,9 @@ async function inicializarMapa() {
 
     if (carregando) carregando.classList.add("escondido");
 
-    for (var k = 0; k < semCoords.length; k++) {
-      var pontoSem = semCoords[k];
-      var coordsSem = null;
+    for (let k = 0; k < semCoords.length; k++) {
+      const pontoSem = semCoords[k];
+      let coordsSem = null;
 
       if (pontoSem["Plus Code"] && pontoSem["Plus Code"].trim()) {
         coordsSem = await geocodificar(pontoSem["Plus Code"].trim());
@@ -585,9 +585,9 @@ async function inicializarMapa() {
       }
 
       if (coordsSem) {
-        var corSem = corDoGrupo(pontoSem["Grupo"]);
-        var iconeSem = criarIcone();
-        var marcadorSem = criarMarcador(
+        const corSem = corDoGrupo(pontoSem["Grupo"]);
+        const iconeSem = criarIcone();
+        const marcadorSem = criarMarcador(
           pontoSem,
           coordsSem,
           mapaGlobal,

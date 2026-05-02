@@ -278,12 +278,15 @@ body {
 }
 
 .cartao-horario {
-  display: flex;
-  align-items: center;
-  gap: 6px;
   background: rgba(0, 153, 57, 0.05);
   border-radius: 6px;
   padding: 6px 10px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--verde-acento);
+  line-height: 1.5;
 }
 
 .cartao-horario svg {
@@ -468,7 +471,7 @@ body {
   border-radius: 6px;
   padding: 6px 10px;
   display: flex;
-  flex-direction: column;
+  align-items: center;
   gap: 4px;
   font-size: 11px;
   color: var(--verde-acento);

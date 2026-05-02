@@ -349,7 +349,12 @@ function conteudoPopup(ponto) {
       })
       .join("<br>");
     if (horarios) {
-      html += '<div class="popup-horario">' + horarios + "</div>";
+      html +=
+        '<div class="popup-horario">' +
+        iconeCalendario(13) +
+        "<span>" +
+        horarios +
+        "</span></div>";
     }
   }
 
@@ -427,7 +432,7 @@ function criarCartao(ponto, marcador, cor) {
       .filter(function (h) {
         return h;
       })
-      .join(" · ");
+      .join("<br>");
     if (horarios) {
       html +=
         '<div class="cartao-horario">' +

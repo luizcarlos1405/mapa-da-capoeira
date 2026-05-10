@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mapacapoeira.org/sitemap.xml

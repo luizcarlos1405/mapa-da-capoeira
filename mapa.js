@@ -466,10 +466,16 @@ function combinarFiltro(ponto) {
       return (
         (ponto[COLUNAS.RESPONSAVEL] || "").toLowerCase().indexOf(texto) >= 0
       );
+    case "endereco":
+      return (
+        (ponto[COLUNAS.NOME_ENDERECO] || "").toLowerCase().indexOf(texto) >= 0
+      );
     default:
       return (
         (ponto[COLUNAS.GRUPO] || "").toLowerCase().indexOf(texto) >= 0 ||
         (ponto[COLUNAS.RESPONSAVEL] || "").toLowerCase().indexOf(texto) >= 0 ||
+        (ponto[COLUNAS.NOME_ENDERECO] || "").toLowerCase().indexOf(texto) >=
+          0 ||
         (ponto[COLUNAS.ENDERECO] || "").toLowerCase().indexOf(texto) >= 0 ||
         (ponto[COLUNAS.TELEFONE] || "").toLowerCase().indexOf(texto) >= 0 ||
         (ponto[COLUNAS.INSTAGRAM] || "").toLowerCase().indexOf(texto) >= 0

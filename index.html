@@ -4,9 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mapa da Capoeira — Locais de Treino em Dourados, MS</title>
-    <meta name="description" content="Mapa interativo de locais de treino de capoeira em Dourados, MS. Encontre rodas, aulas e grupos de capoeira perto de você. Horários, endereços e contatos." />
-    <meta property="og:title" content="Mapa da Capoeira — Locais de Treino em Dourados, MS" />
-    <meta property="og:description" content="Encontre locais de treino de capoeira em Dourados, MS. Mapa interativo com horários, endereços e contatos dos grupos." />
+    <meta
+      name="description"
+      content="Mapa interativo de locais de treino de capoeira em Dourados, MS. Encontre rodas, aulas e grupos de capoeira perto de você. Horários, endereços e contatos."
+    />
+    <meta
+      property="og:title"
+      content="Mapa da Capoeira — Locais de Treino em Dourados, MS"
+    />
+    <meta
+      property="og:description"
+      content="Encontre locais de treino de capoeira em Dourados, MS. Mapa interativo com horários, endereços e contatos dos grupos."
+    />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://mapacapoeira.org/" />
     <meta property="og:locale" content="pt_BR" />
@@ -34,16 +43,18 @@
       <aside id="painel" class="fechado">
         <header id="cabecalho-painel">
           <img
-            class="icone-berimbau"
-            src="berimbau.svg"
-            alt="Berimbau"
-            height="80"
+            class="logo-comafro"
+            src="comafro-logo.jpg"
+            alt="COMAFRO Dourados"
           />
           <div class="titulo-linha">
-            <h1>Mapa da Capoeira</h1>
-            <p class="subtitulo">Encontre locais de treino perto de você</p>
+            <h1>Mapa da Capoeira · Dourados, MS</h1>
+            <p class="subtitulo">
+              Encontre grupos e locais de treino perto de você
+            </p>
             <div class="faixa-bandeira">
-              <span></span><span></span><span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span><span></span
+              ><span></span>
             </div>
           </div>
         </header>
@@ -53,7 +64,17 @@
             <h2>Locais de Treino</h2>
             <span id="contagem-movel" class="selo-contagem">0</span>
             <button class="btn-fechar-painel" onclick="fecharPainel()">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
                 <line x1="18" y1="6" x2="6" y2="18"></line>
                 <line x1="6" y1="6" x2="18" y2="18"></line>
               </svg>
@@ -85,10 +106,7 @@
             />
           </div>
           <div id="abas-filtro">
-            <button
-              class="aba ativa"
-              onclick="definirFiltro(this, 'todos')"
-            >
+            <button class="aba ativa" onclick="definirFiltro(this, 'todos')">
               Todos
             </button>
             <button class="aba" onclick="definirFiltro(this, 'nome')">
@@ -97,10 +115,7 @@
             <button class="aba" onclick="definirFiltro(this, 'grupo')">
               Grupo
             </button>
-            <button
-              class="aba"
-              onclick="definirFiltro(this, 'responsavel')"
-            >
+            <button class="aba" onclick="definirFiltro(this, 'responsavel')">
               Responsável
             </button>
             <button class="aba" onclick="definirFiltro(this, 'endereco')">
@@ -114,12 +129,23 @@
         </div>
 
         <footer id="rodape-painel">
-          Dados de domínio público · OpenStreetMap
+          Mapa mantido por COMAFRO Dourados · OpenStreetMap
         </footer>
       </aside>
 
       <main id="area-mapa">
         <div id="mapa"></div>
+        <header id="topbar-movel">
+          <img
+            src="comafro-logo.jpg"
+            alt="COMAFRO Dourados"
+            class="logo-topbar"
+          />
+          <div class="topbar-texto">
+            <span class="topbar-titulo">Mapa da Capoeira · Dourados, MS</span>
+            <span class="topbar-subtitulo">Grupos e locais de treino</span>
+          </div>
+        </header>
         <div id="busca-movel">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -170,20 +196,20 @@
       <h1>Mapa da Capoeira — Dourados, MS</h1>
       <p>
         Encontre locais de treino de capoeira em Dourados, Mato Grosso do Sul.
-        Mapa interativo com endereços, horários de treino, telefones de contato e
-        grupos de capoeira da cidade e região.
+        Mapa interativo com endereços, horários de treino, telefones de contato
+        e grupos de capoeira da cidade e região.
       </p>
       <h2>Grupos de Capoeira em Dourados</h2>
       <p>
         Consulte nosso mapa para encontrar aulas de capoeira, rodas e treinos em
-        Dourados, MS. O Mapa da Capoeira reúne informações sobre grupos, mestres,
-        horários e locais de prática em toda a cidade.
+        Dourados, MS. O Mapa da Capoeira reúne informações sobre grupos,
+        mestres, horários e locais de prática em toda a cidade.
       </p>
       <h2>Como encontrar treino de capoeira</h2>
       <p>
-        Use o mapa para buscar por nome do grupo, nome do responsável ou endereço.
-        Cada marcador mostra o horário de treino, telefone e Instagram do grupo.
-        Capoeira em Dourados — venha treinar!
+        Use o mapa para buscar por nome do grupo, nome do responsável ou
+        endereço. Cada marcador mostra o horário de treino, telefone e Instagram
+        do grupo. Capoeira em Dourados — venha treinar!
       </p>
     </noscript>
 

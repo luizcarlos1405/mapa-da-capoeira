@@ -68,15 +68,19 @@ body {
   gap: 12px;
 }
 
-.icone-berimbau {
+.logo-comafro {
+  width: 68px;
+  height: 68px;
+  border-radius: 10px;
+  object-fit: cover;
   flex-shrink: 0;
 }
 
 #cabecalho-painel h1 {
   font-family: "Anton", sans-serif;
-  font-size: 26px;
+  font-size: 18px;
   font-weight: 400;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
   color: #fff;
 }
 
@@ -506,6 +510,10 @@ body {
   display: none;
 }
 
+#topbar-movel {
+  display: none;
+}
+
 #carregando {
   position: fixed;
   inset: 0;
@@ -632,12 +640,58 @@ body {
     height: 100vh;
   }
 
+  #topbar-movel {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1001;
+    background: linear-gradient(
+      to bottom,
+      var(--verde-escuro),
+      var(--verde-acento)
+    );
+  }
+
+  .logo-topbar {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .topbar-texto {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .topbar-titulo {
+    font-family: "Anton", sans-serif;
+    font-size: 13px;
+    color: #fff;
+    letter-spacing: 0.3px;
+    line-height: 1.1;
+  }
+
+  .topbar-subtitulo {
+    font-size: 10px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.67);
+    line-height: 1.1;
+  }
+
   #busca-movel {
     display: flex;
     align-items: center;
     gap: 10px;
     position: absolute;
-    top: 10px;
+    top: 68px;
     left: 16px;
     right: 16px;
     background: var(--fundo-carta);
@@ -681,6 +735,6 @@ body {
 
   .leaflet-control-zoom {
     margin-right: 16px;
-    margin-top: 70px;
+    margin-top: 128px;
   }
 }

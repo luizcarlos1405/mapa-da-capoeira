@@ -455,11 +455,6 @@ function combinarFiltro(ponto) {
   const texto = textoBusca.toLowerCase();
 
   switch (campoFiltro) {
-    case "nome":
-      return (
-        (ponto[COLUNAS.NOME_ENDERECO] || "").toLowerCase().indexOf(texto) >=
-          0 || (ponto[COLUNAS.ENDERECO] || "").toLowerCase().indexOf(texto) >= 0
-      );
     case "grupo":
       return (ponto[COLUNAS.GRUPO] || "").toLowerCase().indexOf(texto) >= 0;
     case "responsavel":

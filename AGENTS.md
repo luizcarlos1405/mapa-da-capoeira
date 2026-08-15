@@ -51,3 +51,4 @@ Current columns: `Mostrar no Mapa`, `Nome do Endereço`, `Endereço`, `Plus Code
 - Cache is keyed by the raw address string passed to `geocodificar()` — if an address or Plus Code is corrected in the CSV, the old cache entry will still match and serve stale coordinates. Clear with `localStorage.removeItem('mapacapoeira_geocode')`
 - The CSV parser (`parsearCSV` / `separarCampos`) handles quoted fields and escaped double-quotes, but does not handle newlines inside quoted fields
 - Rows are filtered by `Mostrar no Mapa` = `TRUE` before processing (others are silently skipped)
+- Search matching is diacritic-insensitive: both the query and field values are normalized via `removerAcentos()` in `mapa.js` (NFD decomposition + stripping combining marks), so `jose` matches `José` and vice versa

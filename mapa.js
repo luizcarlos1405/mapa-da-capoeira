@@ -138,6 +138,13 @@ function embaralhar(array) {
   }
 }
 
+function removerAcentos(texto) {
+  return (texto || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+}
+
 function parsearCSV(texto) {
   const linhas = texto
     .replace(/\r\n/g, "\n")
@@ -452,28 +459,23 @@ function criarAvisoNaoEncontrado(ponto) {
 
 function combinarFiltro(ponto) {
   if (!textoBusca) return true;
-  const texto = textoBusca.toLowerCase();
+  const texto = removerAcentos(textoBusca);
 
   switch (campoFiltro) {
     case "grupo":
-      return (ponto[COLUNAS.GRUPO] || "").toLowerCase().indexOf(texto) >= 0;
+      return removerAcentos(ponto[COLUNAS.GRUPO]).indexOf(texto) >= 0;
     case "responsavel":
-      return (
-        (ponto[COLUNAS.RESPONSAVEL] || "").toLowerCase().indexOf(texto) >= 0
-      );
+      return removerAcentos(ponto[COLUNAS.RESPONSAVEL]).indexOf(texto) >= 0;
     case "endereco":
-      return (
-        (ponto[COLUNAS.NOME_ENDERECO] || "").toLowerCase().indexOf(texto) >= 0
-      );
+      return removerAcentos(ponto[COLUNAS.NOME_ENDERECO]).indexOf(texto) >= 0;
     default:
       return (
-        (ponto[COLUNAS.GRUPO] || "").toLowerCase().indexOf(texto) >= 0 ||
-        (ponto[COLUNAS.RESPONSAVEL] || "").toLowerCase().indexOf(texto) >= 0 ||
-        (ponto[COLUNAS.NOME_ENDERECO] || "").toLowerCase().indexOf(texto) >=
-          0 ||
-        (ponto[COLUNAS.ENDERECO] || "").toLowerCase().indexOf(texto) >= 0 ||
-        (ponto[COLUNAS.TELEFONE] || "").toLowerCase().indexOf(texto) >= 0 ||
-        (ponto[COLUNAS.INSTAGRAM] || "").toLowerCase().indexOf(texto) >= 0
+        removerAcentos(ponto[COLUNAS.GRUPO]).indexOf(texto) >= 0 ||
+        removerAcentos(ponto[COLUNAS.RESPONSAVEL]).indexOf(texto) >= 0 ||
+        removerAcentos(ponto[COLUNAS.NOME_ENDERECO]).indexOf(texto) >= 0 ||
+        removerAcentos(ponto[COLUNAS.ENDERECO]).indexOf(texto) >= 0 ||
+        removerAcentos(ponto[COLUNAS.TELEFONE]).indexOf(texto) >= 0 ||
+        removerAcentos(ponto[COLUNAS.INSTAGRAM]).indexOf(texto) >= 0
       );
   }
 }
